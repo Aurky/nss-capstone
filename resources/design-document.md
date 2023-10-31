@@ -211,7 +211,13 @@ location // string (locationId)
 
 ## 8. Pages
 
-Currently, having issues with image links. There are reference images for the frontend pages intended for the project in resources/images/.
 
+![](images/IMG_Capstone1.jpg)
+![](images/IMG_2416.jpeg)
+![](images/IMG_2417.jpeg)
+![](images/IMG_2418.jpeg)
+![](images/IMG_2419.jpeg)
+![](images/IMG_2420.jpeg)
+![](images/IMG_2421.jpeg)
 
 
