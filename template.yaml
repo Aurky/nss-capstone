@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Music Playlist Service
+  Bulletin Board Service
 
 Parameters:
 
@@ -200,47 +200,47 @@ Resources:
                   - logs:PutLogEvents
                   - cloudwatch:PutMetricData
                 Resource: '*'
-        - PolicyName: 'AccessPlaylistsTable'
+        - PolicyName: 'AccessUsersTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/playlists"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/users"
 
-        - PolicyName: 'AccessAlbumTracksTable'
+        - PolicyName: 'AccessAdsTable'
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action: dynamodb:*
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/album_tracks"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ads"
 
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
 
-#  GetPlaylistLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Role: !GetAtt AccessRole.Arn
-#      CodeUri: MusicPlaylistServiceLambda
-#      Handler: com.nashss.se.musicplaylistservice.lambda.GetPlaylistLambda::handleRequest
-#      Runtime: java11
-#      Architectures:
-#        - x86_64
-#      MemorySize: 512
-#      Environment:
-#        Variables:
-#          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-#      Events:
-#        MusicPlaylistService:
-#          Type: Api
-#          Properties:
-#            Path: /playlists/{id}
-#            Method: get
-#            Auth:
-#              Authorizer: 'NONE'
+  GetUserLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Role: !GetAtt AccessRole.Arn
+      CodeUri: BulletinBoardServiceLambda
+      Handler: com.nashss.se.nss.capstone.lambda.GetUserLambda::handleRequest
+      Runtime: java11
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Environment:
+        Variables:
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        BulletinBoardService:
+          Type: Api
+          Properties:
+            Path: /users/{userId}
+            Method: get
+            Auth:
+              Authorizer: 'NONE'
 #
 #  SearchPlaylistsLambda:
 #    Type: AWS::Serverless::Function
@@ -350,33 +350,29 @@ Resources:
   # DynamoDB Configuration
   #-----------------------------------------------------
   
-  PlaylistsTable:
+  UsersTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "id"
+        - AttributeName: "userId"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "id"
+        - AttributeName: "userId"
           KeyType: "HASH"
       BillingMode: "PAY_PER_REQUEST"
-      TableName: "playlists"
+      TableName: "users"
 
-  AlbumTracksTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: "asin"
-          AttributeType: "S"
-        - AttributeName: "track_number"
-          AttributeType: "N"
-      KeySchema:
-        - AttributeName: "asin"
-          KeyType: "HASH"
-        - AttributeName: "track_number"
-          KeyType: "RANGE"
-      BillingMode: "PAY_PER_REQUEST"
-      TableName: "album_tracks"
+#  AdsTable:
+#    Type: AWS::DynamoDB::Table
+#    Properties:
+#      AttributeDefinitions:
+#        - AttributeName: "adId"
+#          AttributeType: "S"
+#      KeySchema:
+#        - AttributeName: "adId"
+#          KeyType: "HASH"
+#      BillingMode: "PAY_PER_REQUEST"
+#      TableName: "ads"
 
 #-----------------------------------------------------
 # The outputs defined below will be printed
