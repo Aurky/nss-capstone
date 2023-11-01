@@ -220,12 +220,12 @@ Resources:
   # Lambda Functions Configuration
   #-----------------------------------------------------
 
-  GetUserLambda:
+  CreateUserLambda:
     Type: AWS::Serverless::Function
     Properties:
       Role: !GetAtt AccessRole.Arn
       CodeUri: BulletinBoardServiceLambda
-      Handler: com.nashss.se.nss.capstone.lambda.GetUserLambda::handleRequest
+      Handler: com.nashss.se.musicplaylistservice.lambda.CreateUserLambda::handleRequest
       Runtime: java11
       Architectures:
         - x86_64
@@ -238,9 +238,7 @@ Resources:
           Type: Api
           Properties:
             Path: /users/{userId}
-            Method: get
-            Auth:
-              Authorizer: 'NONE'
+            Method: post
 #
 #  SearchPlaylistsLambda:
 #    Type: AWS::Serverless::Function
