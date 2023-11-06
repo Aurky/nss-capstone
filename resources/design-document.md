@@ -38,7 +38,9 @@ U7. As a user, I want to be able to update an ad (including name, description, l
 
 U8. As a user, I want to be able to view my user details.
 
-U9. As a user, I want to be able to
+U9. As a user, I want to be able to view ads based on area location.
+
+U10. As a user, I want to be able to view ads based on the venue location.
 
 ### 3.2  Stretch Use Cases
 
@@ -91,6 +93,7 @@ String name;
 String bio;
 List<String> groups;
 List<String> ads; //adId
+List<String> roles;
 ```
 
 ```
@@ -100,8 +103,9 @@ String adId;
 String name;
 String description;
 Double salary;
-String location; //venue name
-String userId;
+String location; //locationId
+String venue; //venueId
+String user; //userId
 Set<String> tags;
 ```
 
@@ -119,17 +123,7 @@ List<String> venues; //venueId
 String venueId;
 String name; 
 String description;
-String location;
-```
-
-```
-// BoardModel
-
-String boardId;
-String name;
-Set<String> users; //userIds
-Set<String> ads; //adIds
-String location;
+String location; //locationId
 ```
 
 ### 6.2 Get Ad Endpoint
@@ -174,24 +168,20 @@ String location;
     * If the name contains any of the invalid characters, will throw an InvalidAttributeValueException.
 
 ## 7. Tables
-### 7.1 `boards`
-```
-boardId // partition key, string
-name // string
-usersList // stringSet (userId)
-adsList // stringSet (adId)
-location // stringSet (locationId)
-```
 
-### 7.2 `ads`
+### 7.1 `ads`
 ```
-Id // partition key, string
+adId // partition key, string
 name // string
 userId // string
 tags // stringSet
+description // string
+salary // double
+location // string
+venue // string
 ```
 
-### 7.3 `users`
+### 7.2 `users`
 ```
 userId // partition key, string
 name // string
@@ -201,13 +191,14 @@ adsList // stringSet (adId)
 roles // stringList
 ```
 
-### 7.4 `locations`
+### 7.3 `locations`
 ```
 locationId // partition key, string
+name // string
 venuesList // stringSet (venueId)
 ```
 
-### 7.5 `venues`
+### 7.4 `venues`
 ```
 venueId // partition key, string
 name // string
