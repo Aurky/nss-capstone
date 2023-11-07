@@ -26,13 +26,13 @@ U1. As a user, I want to create a new ad.
 
 U2. As a user, I want to view all my posted ad(s)
 
-U3. As a user, I want to update my ad(s) details. 
+U3. As a user, I want to be able to update my ad(s) details. 
 
 U4. As a user, I want to be able to delete my ad(s).
 
 U5. As a user, I want to be able to update my user profile details.
 
-U6. As a user, I want to bb able to view my individual ad(s).
+U6. As a user, I want to be able to view my individual ad(s).
 
 U7. As a user, I want to be able to update an ad (including name, description, location, tags, salary...).
 
