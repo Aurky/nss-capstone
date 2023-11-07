@@ -1,4 +1,4 @@
-package com.nashss.se.bulletinboardservice.lambda;
+package com.nashss.se.bulletinboardservice.lambda.user;
 
 public class CreateUserLambda {
 
