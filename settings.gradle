@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'nss-capstone'
-include('app')
+include('BulletinBoardServiceLambda')
