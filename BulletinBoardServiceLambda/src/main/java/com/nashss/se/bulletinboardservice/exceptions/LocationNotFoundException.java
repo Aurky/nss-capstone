@@ -1,16 +1,17 @@
 package com.nashss.se.bulletinboardservice.exceptions;
 
-public class UserNotFoundException extends RuntimeException {
+/**
+ * Exception to throw when a given location ID is not found in the database.
+ */
 
-    /**
-     * Exception to throw when a given user ID is not found in the database.
-     */
-    private static final long serialVersionUID = 547578873314629993L;
+public class LocationNotFoundException extends RuntimeException {
+
+    private static final long serialVersionUID = -5488297912747679026L;
 
     /**
      * Exception with no message or cause.
      */
-    public UserNotFoundException() {
+    public LocationNotFoundException() {
         super();
     }
 
@@ -18,7 +19,7 @@ public class UserNotFoundException extends RuntimeException {
      * Exception with a message but no cause.
      * @param message A descriptive message for this exception.
      */
-    public UserNotFoundException(String message) {
+    public LocationNotFoundException(String message) {
         super(message);
     }
 
@@ -26,7 +27,7 @@ public class UserNotFoundException extends RuntimeException {
      * Exception with no message but with a cause.
      * @param cause The original throwable resulting in this exception.
      */
-    public UserNotFoundException(Throwable cause) {
+    public LocationNotFoundException(Throwable cause) {
         super(cause);
     }
 
@@ -35,7 +36,7 @@ public class UserNotFoundException extends RuntimeException {
      * @param message A descriptive message for this exception.
      * @param cause The original throwable resulting in this exception.
      */
-    public UserNotFoundException(String message, Throwable cause) {
+    public LocationNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 }

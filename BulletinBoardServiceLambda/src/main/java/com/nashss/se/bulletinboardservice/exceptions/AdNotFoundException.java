@@ -11,7 +11,7 @@ public class AdNotFoundException extends RuntimeException {
     /**
      * Exception with no message or cause.
      */
-    public AdNotFoundException(){
+    public AdNotFoundException() {
         super();
     }
 
