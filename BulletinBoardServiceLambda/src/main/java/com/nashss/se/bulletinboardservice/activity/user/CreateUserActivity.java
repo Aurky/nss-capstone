@@ -1,4 +1,4 @@
-//package com.nashss.se.bulletinboardservice.activity.user;
-//
-//public class CreateUserActivity {
-//}
+package com.nashss.se.bulletinboardservice.activity.user;
+
+public class CreateUserActivity {
+}
