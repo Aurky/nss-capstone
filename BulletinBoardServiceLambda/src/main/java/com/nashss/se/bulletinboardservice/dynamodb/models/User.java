@@ -58,7 +58,7 @@ public class User {
     public List<Ad> getAds() {
         return ads;
     }
-    public void setGroups(List<Ad> ads) {
+    public void setAds(List<Ad> ads) {
         this.ads = ads;
     }
 
