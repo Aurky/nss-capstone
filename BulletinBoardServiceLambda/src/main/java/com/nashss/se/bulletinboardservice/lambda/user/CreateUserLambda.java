@@ -20,7 +20,7 @@ public class CreateUserLambda
                     CreateUserRequest unauthenticatedRequest = input.fromBody(CreateUserRequest.class);
                     return input.fromUserClaims(claims ->
                             CreateUserRequest.builder()
-                                    .withName(unathenticatedRequest.getName())
+                                    .withName(unauthenticatedRequest.getName())
                                     .withUserId(claims.get("email"))
                                     .build());
                 },
