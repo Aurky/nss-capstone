@@ -216,6 +216,22 @@ Resources:
                 Action: dynamodb:*
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ads"
 
+        - PolicyName: 'AccessVenuesTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/venues"
+
+        - PolicyName: 'AccessLocationsTable'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: dynamodb:*
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/locations"
+
   #-----------------------------------------------------
   # Lambda Functions Configuration
   #-----------------------------------------------------
@@ -365,8 +381,6 @@ Resources:
     Properties:
       AttributeDefinitions:
         - AttributeName: "adId"
-          AttributeType: "S"
-        - AttributeName: "userId"
           AttributeType: "S"
         - AttributeName: "location"
           AttributeType: "S"

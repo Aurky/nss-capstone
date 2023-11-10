@@ -59,7 +59,8 @@ public class UserModel {
         UserModel that = (UserModel) o;
 
         return  Objects.equals(userId, that.userId) && Objects.equals(name, that.name) &&
-                Objects.equals(bio, that.bio) && Objects.equals(ads, that.ads) && Objects.equals(groups, that.groups) && Objects.equals(roles, that.roles);
+                Objects.equals(bio, that.bio) && Objects.equals(ads, that.ads) &&
+                Objects.equals(groups, that.groups) && Objects.equals(roles, that.roles);
     }
 
     @Override
