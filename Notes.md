@@ -2,6 +2,8 @@
 * 'Finished' up the create user endpoint and successfully deployed with the current codebase on branch `feature/user-endpoints`
   * Resulted in all 4 tables being created
   * Ran a test local frontend to ensure it still works. - Everything looks good aside from it being for the musicplaylistservice still.
+  * Started a super simple frontend with `index.html` 
+    * names are changed but functionality is not!
 
 ### Saturday 11-11
 * Made placeholder html pages that successfully navigate with buttons. No js files were made for functionality. 
