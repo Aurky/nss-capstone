@@ -38,8 +38,8 @@ public class AdDao {
      * @param adId the Ad ID
      * @return the stored Ad, or null if none was found.
      */
-    public Ad getAd(String adId) {
-        Ad ad = this.dynamoDbMapper.load(Ad.class, adId);
+    public Ad getAd(String userId, String adId) {
+        Ad ad = this.dynamoDbMapper.load(Ad.class, userId, adId);
 
         if (ad == null) {
             metricsPublisher.addCount(MetricsConstants.GETAD_ADNOTFOUND_COUNT, 1);
