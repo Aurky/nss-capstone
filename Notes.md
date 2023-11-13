@@ -10,6 +10,10 @@
   * Just placeholders to make the future work flow more efficiently. 
 
 ### Monday 11-13
+* Fleshed out all classes for the ad endpoints: create, update, get, and delete.
+  * Still stuck on the choice for createUser - ask instructor
+  * Do I need to make all these classes for locations and venues???
+    * Gut says yes due to tables entities.
 ### Tuesday 11-14
 ### Wednesday 11-15
 ### Thursday 11-16
