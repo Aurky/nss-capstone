@@ -53,11 +53,16 @@ public class AdDao {
     /**
      * Saves (creates or updates) the given ad.
      *
-     * @param user The ad to save
+     * @param ad The ad to save
      * @return The Ad object that was saved
      */
     public Ad saveAd(Ad ad) {
         this.dynamoDbMapper.save(ad);
+        return ad;
+    }
+
+    public Ad deleteAd(Ad ad) {
+        this.dynamoDbMapper.delete(ad);
         return ad;
     }
 }
