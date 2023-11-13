@@ -1,5 +1,6 @@
 package com.nashss.se.bulletinboardservice.dependency;
 
+import com.nashss.se.bulletinboardservice.activity.ad.CreateAdActivity;
 import com.nashss.se.bulletinboardservice.activity.user.CreateUserActivity;
 
 import dagger.Component;
@@ -15,4 +16,6 @@ public interface ServiceComponent {
      * @return CreateUserActivity
      */
     CreateUserActivity provideCreateUserActivity();
+
+    CreateAdActivity provideCreateAdActivity();
 }

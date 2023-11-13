@@ -14,12 +14,11 @@ public final class BullitenBoardServiceUtils {
     public static String generateUserId() {
         return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
     }
-
-//    /**
-//     * Provides a generated Ad ID.
-//     * @return String of a generated ID.
-//     */
-//    public static String generateAdId() {
-//        return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
-//    }
+    /**
+     * Provides a generated Ad ID.
+     * @return String of a generated ID.
+     */
+    public static String generateAdId() {
+        return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
+    }
 }

@@ -14,6 +14,7 @@ public class MetricsConstants {
     public static final String NAMESPACE_NAME = "U3/BulletinBoardService";
 
     public static final String GETUSER_USERNOTFOUND_COUNT = "GetUser.UserNotFoundException.Count";
+    public static final String GETAD_ADNOTFOUND_COUNT = "GetAd.AdNotFoundException.Count";
 
     public static final String GETMEALPLAN_MEALPLANNOTFOUND_COUNT = "GetMealPlan.MealPlanNotFoundException.Count";
 

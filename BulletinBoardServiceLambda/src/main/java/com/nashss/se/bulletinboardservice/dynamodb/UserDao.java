@@ -22,7 +22,7 @@ public class UserDao {
     private final MetricsPublisher metricsPublisher;
 
     /**
-     * Instantiates a PantryDao object.
+     * Instantiates a UserDao object.
      *
      * @param dynamoDbMapper   the {@link DynamoDBMapper} used to interact with the playlists table
      * @param metricsPublisher the {@link MetricsPublisher} used to record metrics.
@@ -40,22 +40,22 @@ public class UserDao {
      * @return the stored User, or null if none was found.
      */
     public User getUser(String userId) {
-        User pantry = this.dynamoDbMapper.load(User.class, userId);
+        User user = this.dynamoDbMapper.load(User.class, userId);
 
-        if (pantry == null) {
+        if (user == null) {
             metricsPublisher.addCount(MetricsConstants.GETUSER_USERNOTFOUND_COUNT, 1);
-            throw new UserNotFoundException("Could not find pantry with id " + userId);
+            throw new UserNotFoundException("Could not find user with id " + userId);
 
         }
         metricsPublisher.addCount(MetricsConstants.GETUSER_USERNOTFOUND_COUNT, 0);
-        return pantry;
+        return user;
     }
 
     /**
-     * Saves (creates or updates) the given pantry.
+     * Saves (creates or updates) the given user.
      *
-     * @param user The pantry to save
-     * @return The Pantry object that was saved
+     * @param user The user to save
+     * @return The User object that was saved
      */
     public User saveUser(User user) {
         this.dynamoDbMapper.save(user);
