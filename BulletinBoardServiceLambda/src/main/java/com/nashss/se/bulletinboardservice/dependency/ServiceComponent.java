@@ -1,5 +1,10 @@
 package com.nashss.se.bulletinboardservice.dependency;
 
+import com.amazonaws.services.dynamodbv2.model.Delete;
+import com.nashss.se.bulletinboardservice.activity.ad.CreateAdActivity;
+import com.nashss.se.bulletinboardservice.activity.ad.DeleteAdActivity;
+import com.nashss.se.bulletinboardservice.activity.ad.GetAdActivity;
+import com.nashss.se.bulletinboardservice.activity.ad.UpdateAdActivity;
 import com.nashss.se.bulletinboardservice.activity.user.CreateUserActivity;
 
 import dagger.Component;
@@ -15,4 +20,12 @@ public interface ServiceComponent {
      * @return CreateUserActivity
      */
     CreateUserActivity provideCreateUserActivity();
+
+    CreateAdActivity provideCreateAdActivity();
+
+    GetAdActivity provideGetAdActivity();
+
+    UpdateAdActivity provideUpdateAdActivity();
+
+    DeleteAdActivity provideDeleteAdActivity();
 }
