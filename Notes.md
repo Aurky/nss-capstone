@@ -14,6 +14,8 @@
   * Still stuck on the choice for createUser - ask instructor
   * Do I need to make all these classes for locations and venues???
     * Gut says yes due to tables entities.
+
+
 ### Tuesday 11-14
 ### Wednesday 11-15
 ### Thursday 11-16
