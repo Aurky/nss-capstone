@@ -40,12 +40,12 @@ public class CreateAdRequest {
         private String name;
         private String adId;
 
-        public CreateAdRequest.Builder withName(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public CreateAdRequest.Builder withAdId(String adId) {
+        public Builder withAdId(String adId) {
             this.adId = adId;
             return this;
         }
