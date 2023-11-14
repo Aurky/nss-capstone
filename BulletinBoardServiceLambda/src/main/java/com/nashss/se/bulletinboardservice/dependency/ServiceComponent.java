@@ -5,8 +5,10 @@ import com.nashss.se.bulletinboardservice.activity.ad.CreateAdActivity;
 import com.nashss.se.bulletinboardservice.activity.ad.DeleteAdActivity;
 import com.nashss.se.bulletinboardservice.activity.ad.GetAdActivity;
 import com.nashss.se.bulletinboardservice.activity.ad.UpdateAdActivity;
+import com.nashss.se.bulletinboardservice.activity.location.GetLocationActivity;
 import com.nashss.se.bulletinboardservice.activity.user.CreateUserActivity;
 
+import com.nashss.se.bulletinboardservice.activity.venue.GetVenueActivity;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -28,4 +30,8 @@ public interface ServiceComponent {
     UpdateAdActivity provideUpdateAdActivity();
 
     DeleteAdActivity provideDeleteAdActivity();
+
+    GetVenueActivity provideGetVenueActivity();
+
+    GetLocationActivity provideGetLocationActivity();
 }

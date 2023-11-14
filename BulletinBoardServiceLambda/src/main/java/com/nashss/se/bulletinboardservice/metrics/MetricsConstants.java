@@ -15,6 +15,8 @@ public class MetricsConstants {
 
     public static final String GETUSER_USERNOTFOUND_COUNT = "GetUser.UserNotFoundException.Count";
     public static final String GETAD_ADNOTFOUND_COUNT = "GetAd.AdNotFoundException.Count";
+    public static final String GETVENUE_VENUENOTFOUND_COUNT = "GetVenue.VenueNotFoundException.Count";
+    public static final String GETLOCATION_LOCATIONNOTFOUND_COUNT = "GetLocation.LocationNotFoundException.Count";
 
     public static final String GETMEALPLAN_MEALPLANNOTFOUND_COUNT = "GetMealPlan.MealPlanNotFoundException.Count";
 

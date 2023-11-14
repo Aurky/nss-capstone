@@ -21,4 +21,12 @@ public final class BullitenBoardServiceUtils {
     public static String generateAdId() {
         return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
     }
+
+    public static String generateVenueId() {
+        return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
+    }
+
+    public static String generateLocationId() {
+        return RandomStringUtils.randomAlphanumeric(GENERATED_ID_LENGTH);
+    }
 }
