@@ -43,7 +43,7 @@ public class AdDao {
 
         if (ad == null) {
             metricsPublisher.addCount(MetricsConstants.GETAD_ADNOTFOUND_COUNT, 1);
-            throw new UserNotFoundException("Could not find ad with id " + adId);
+            throw new AdNotFoundException("Could not find ad with id " + adId);
 
         }
         metricsPublisher.addCount(MetricsConstants.GETAD_ADNOTFOUND_COUNT, 0);

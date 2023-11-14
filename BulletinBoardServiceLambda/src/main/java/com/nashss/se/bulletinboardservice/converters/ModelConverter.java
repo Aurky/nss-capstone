@@ -1,9 +1,13 @@
 package com.nashss.se.bulletinboardservice.converters;
 
 import com.nashss.se.bulletinboardservice.dynamodb.models.Ad;
+import com.nashss.se.bulletinboardservice.dynamodb.models.Location;
 import com.nashss.se.bulletinboardservice.dynamodb.models.User;
+import com.nashss.se.bulletinboardservice.dynamodb.models.Venue;
 import com.nashss.se.bulletinboardservice.models.AdModel;
+import com.nashss.se.bulletinboardservice.models.LocationModel;
 import com.nashss.se.bulletinboardservice.models.UserModel;
+import com.nashss.se.bulletinboardservice.models.VenueModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +50,23 @@ public class ModelConverter {
                 .withVenue(ad.getVenue())
                 .withUserId(ad.getUserId())
                 .withTags(ad.getTags())
+                .build();
+    }
+
+    public VenueModel toVenueModel(Venue venue) {
+        return VenueModel.builder()
+                .withVenueId(venue.getVenueId())
+                .withName(venue.getName())
+                .withDescription(venue.getDescription())
+                .withLocation(venue.getLocation())
+                .build();
+    }
+
+    public LocationModel toLocationModel(Location location) {
+        return LocationModel.builder()
+                .withLocationId(location.getLocationId())
+                .withName(location.getName())
+                .withVenues(location.getVenues())
                 .build();
     }
 }

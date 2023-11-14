@@ -29,7 +29,7 @@ public class Ad {
         this.adId = adId;
     }
 
-    @DynamoDBHashKey(attributeName = "name")
+    @DynamoDBAttribute(attributeName = "name")
     public String getName() {
         return name;
     }
@@ -38,7 +38,7 @@ public class Ad {
         this.name = name;
     }
 
-    @DynamoDBHashKey(attributeName = "description")
+    @DynamoDBAttribute(attributeName = "description")
     public String getDescription() {
         return description;
     }
@@ -47,7 +47,7 @@ public class Ad {
         this.description = description;
     }
 
-    @DynamoDBHashKey(attributeName = "salary")
+    @DynamoDBAttribute(attributeName = "salary")
     public Double getSalary() {
         return salary;
     }
@@ -56,7 +56,7 @@ public class Ad {
         this.salary = salary;
     }
 
-    @DynamoDBHashKey(attributeName = "location")
+    @DynamoDBAttribute(attributeName = "location")
     public String getLocation() {
         return location;
     }
@@ -65,7 +65,7 @@ public class Ad {
         this.location = location;
     }
 
-    @DynamoDBHashKey(attributeName = "venue")
+    @DynamoDBAttribute(attributeName = "venue")
     public String getVenue() {
         return venue;
     }
@@ -74,7 +74,7 @@ public class Ad {
         this.venue = venue;
     }
 
-    @DynamoDBHashKey(attributeName = "userId")
+    @DynamoDBAttribute(attributeName = "userId")
     public String getUserId() {
         return userId;
     }
@@ -83,7 +83,7 @@ public class Ad {
         this.userId = userId;
     }
 
-    @DynamoDBHashKey(attributeName = "tags")
+    @DynamoDBAttribute(attributeName = "tags")
     public Set<String> getTags() {
         return tags;
     }

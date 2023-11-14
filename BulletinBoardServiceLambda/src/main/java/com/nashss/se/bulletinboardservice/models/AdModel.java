@@ -138,5 +138,4 @@ public class AdModel {
             return new AdModel(adId, name, description, salary, location, venue, userId, tags);
         }
     }
-
 }
