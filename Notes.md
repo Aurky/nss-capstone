@@ -17,6 +17,14 @@
 
 
 ### Tuesday 11-14
+* Took a look at the cognito username as a use for a user in a table
+  * Need to go back over
+* Stubbed out test classes
+
+
 ### Wednesday 11-15
+* N/A
+
 ### Thursday 11-16
+
 ### Friday 11-17

@@ -25,6 +25,10 @@ public class AdModel {
         this.tags = tags;
     }
 
+    public String getAdId() {
+        return adId;
+    }
+
     public String getUserId() {
         return userId;
     }
