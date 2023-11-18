@@ -3,6 +3,7 @@ import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
 
+
 /*
 The code below this comment is equivalent to...
 const EMPTY_DATASTORE_STATE = {
@@ -25,10 +26,9 @@ class Index extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'search', 'displaySearchResults', 'getHTMLForSearchResults'], this);
+        this.bindClassMethods(['mount'], this);
 
-        // Create a enw datastore with an initial "empty" state.
-        this.dataStore = new DataStore(EMPTY_DATASTORE_STATE);
+        this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this.dataStore.addChangeListener(this.displaySearchResults);
         console.log("index constructor");
@@ -47,7 +47,7 @@ class Index extends BindingClass {
         this.client = new BulletinBoardClient();
 
     }
-
+}
 
 
 
