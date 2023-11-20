@@ -7,7 +7,7 @@ export default class BulletinBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -71,6 +71,20 @@ export default class BulletinBoardClient extends BindingClass {
                 }
             });
 
+            return response.data.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getUser(id, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get users.");
+            const response = await this.axiosClient.get(`users/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             return response.data.user;
         } catch (error) {
             this.handleError(error, errorCallback)
