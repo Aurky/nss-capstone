@@ -8,6 +8,7 @@ import com.nashss.se.bulletinboardservice.activity.ad.UpdateAdActivity;
 import com.nashss.se.bulletinboardservice.activity.location.GetLocationActivity;
 import com.nashss.se.bulletinboardservice.activity.user.CreateUserActivity;
 
+import com.nashss.se.bulletinboardservice.activity.user.GetUserActivity;
 import com.nashss.se.bulletinboardservice.activity.venue.GetVenueActivity;
 import dagger.Component;
 
@@ -34,4 +35,6 @@ public interface ServiceComponent {
     GetVenueActivity provideGetVenueActivity();
 
     GetLocationActivity provideGetLocationActivity();
+
+    GetUserActivity provideGetUserActivity();
 }
