@@ -45,7 +45,7 @@ public class CreateUserActivity {
         log.info("Received CreateUserRequest {}", createUserRequest);
 
         User newUser = new User();
-        newUser.setUserId(BullitenBoardServiceUtils.generateUserId());
+        newUser.setUserId(createUserRequest.getUserId());
         newUser.setName(createUserRequest.getName());
         newUser.setBio("");
         newUser.setAds(new ArrayList<>());
