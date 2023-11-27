@@ -7,8 +7,6 @@ import com.nashss.se.bulletinboardservice.activity.requests.CreateUserRequest;
 import com.nashss.se.bulletinboardservice.activity.results.CreateUserResult;
 import com.nashss.se.bulletinboardservice.dynamodb.UserDao;
 import com.nashss.se.bulletinboardservice.dynamodb.models.User;
-import com.nashss.se.bulletinboardservice.models.UserModel;
-import com.nashss.se.bulletinboardservice.utils.BullitenBoardServiceUtils;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -31,7 +29,6 @@ public class CreateUserActivityTest {
 
     @Test
     public void testHandleRequest() {
-        // Arrange
         CreateUserRequest createUserRequest = new CreateUserRequest.Builder()
                 .withUserId("testUserId")
                 .withName("Test User")
@@ -47,11 +44,8 @@ public class CreateUserActivityTest {
 
         when(userDao.saveUser(any(User.class))).thenReturn(newUser);
 
-        // Act
         CreateUserResult createUserResult = createUserActivity.handleRequest(createUserRequest);
 
-        // Assert
-        assertEquals("Test User", createUserResult.getUser().getName());
-        // Add more assertions based on your requirements
+        assertEquals("testUserId", createUserResult.getUser().getUserId());
     }
 }
