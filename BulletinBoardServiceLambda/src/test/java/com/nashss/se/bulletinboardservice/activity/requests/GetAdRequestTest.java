@@ -41,13 +41,10 @@ class GetAdRequestTest {
 
         when(adDao.getAd("user123", "ad456")).thenReturn(sampleAd);
 
-        // Create GetAdActivity instance
         GetAdActivity getAdActivity = new GetAdActivity(adDao);
 
-        // Call handleRequest method
         GetAdResult result = getAdActivity.handleRequest(getAdRequest);
 
-        // Assertions
         assertNotNull(result);
         assertNotNull(result.getAd());
         assertEquals("ad456", result.getAd().getAdId());
