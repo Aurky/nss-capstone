@@ -51,7 +51,7 @@ class LocationDaoTest {
     }
 
     @Test
-    void getLocation_NonExistingAd_ThrowsLocationNotFoundException() {
+    void getLocation_NonExistingLocation_ThrowsLocationNotFoundException() {
 
         when(dynamoDBMapper.load(eq(Location.class), anyString())).thenReturn(null);
 
