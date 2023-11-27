@@ -2,6 +2,7 @@ package com.nashss.se.bulletinboardservice.activity.ad;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.openMocks;
 
 import com.nashss.se.bulletinboardservice.activity.requests.CreateAdRequest;
 import com.nashss.se.bulletinboardservice.activity.results.CreateAdResult;
@@ -25,7 +26,7 @@ public class CreateUserActivityTest {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        openMocks(this);
     }
 
     @Test

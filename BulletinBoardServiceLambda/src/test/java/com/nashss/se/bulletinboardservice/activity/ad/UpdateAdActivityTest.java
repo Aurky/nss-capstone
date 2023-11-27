@@ -33,7 +33,7 @@ class UpdateAdActivityTest {
 
     @Test
     void handleRequest() {
-        UpdateAdActivity updateAdActivity = new UpdateAdActivity(adDao);
+        updateAdActivity = new UpdateAdActivity(adDao);
 
         Ad testAd = new Ad();
         testAd.setAdId("testAdId");
