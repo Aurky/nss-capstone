@@ -51,7 +51,7 @@ public class CreateAdActivity {
         newAd.setSalary(0.0);
         newAd.setLocation("");
         newAd.setVenue("");
-        newAd.setUserId("");
+        newAd.setUserId(createAdRequest.getUserId());
         newAd.setTags(new HashSet<>());
 
         adDao.saveAd(newAd);

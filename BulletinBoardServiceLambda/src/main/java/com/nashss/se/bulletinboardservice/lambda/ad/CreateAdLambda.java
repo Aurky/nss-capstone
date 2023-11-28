@@ -21,7 +21,7 @@ public class CreateAdLambda
                     return input.fromUserClaims(claims ->
                             CreateAdRequest.builder()
                                     .withName(unauthenticatedRequest.getName())
-                                    .withAdId(unauthenticatedRequest.getAdId())
+                                    .withUserId(unauthenticatedRequest.getUserId())
                                     .build());
                 },
                 (request, serviceComponent) ->
