@@ -28,3 +28,8 @@
 ### Thursday 11-16
 
 ### Friday 11-17
+
+### Tuesday 11-28
+* Getting front end together
+  * All pages have a working header
+    * Currently trying to get the Login through cognito to lead directly to the homePage.html - currently looking at the env files
