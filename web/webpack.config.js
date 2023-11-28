@@ -24,6 +24,11 @@ module.exports = {
   },
   entry: {
     index: path.resolve(__dirname, 'src', 'pages', 'index.js'),
+    homePage: path.resolve(__dirname, 'src', 'pages', 'homePage.js'),
+    createAd: path.resolve(__dirname, 'src', 'pages', 'createAd.js'),
+    updateAd: path.resolve(__dirname, 'src', 'pages', 'updateAd'),
+    userSetting: path.resolve(__dirname, 'src', 'pages', 'userSetting'),
+    viewAd: path.resolve(__dirname, 'src', 'pages', 'viewAd'),
   },
   output: {
     path: path.resolve(__dirname, 'build', 'assets'),
