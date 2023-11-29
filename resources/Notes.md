@@ -41,3 +41,7 @@
 * Currently displaying the current user details as headers 
   * This is purely for testing later to make sure all things are working, this won't work long term for bio.
     * Will need to be cleaned up.
+  * This is 'done'
+* CreateAd is mostly wired up - currently receiving a network error on create submit.
+  * There's a good chance the html is setup odd to handle it with the hidden error and error-message placement?
+      * Going to continue on wiring the other pages so that when I start solving the similar issues on one page, the rest will also be manageable.

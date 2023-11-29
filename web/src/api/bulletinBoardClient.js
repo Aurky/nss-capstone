@@ -7,7 +7,7 @@ export default class BulletinBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -106,6 +106,26 @@ export default class BulletinBoardClient extends BindingClass {
                 }
             });
             return response.data.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async createAd(adName, adDescription, adLocation, adTags, adSalary, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create ads.");
+            const response = await this.axiosClient.post(`ads`, {
+                name: adName,
+                description: adDescription,
+                location: adLocation,
+                tags: adTags,
+                salary: adSalary
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.ad;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
