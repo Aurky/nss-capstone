@@ -33,3 +33,11 @@
 * Getting front end together
   * All pages have a working header
     * Currently trying to get the Login through cognito to lead directly to the homePage.html - currently looking at the env files
+
+
+### Wednesday 11-29
+* Current issue with retrieving user/creating user between entry page to the home page. Moving on to get the front end wired up for the rest of the endpoints.
+  * Not an ideal solution, however better to get work done than stare at the screen for an hour.
+* Currently displaying the current user details as headers 
+  * This is purely for testing later to make sure all things are working, this won't work long term for bio.
+    * Will need to be cleaned up.

@@ -91,6 +91,26 @@ export default class BulletinBoardClient extends BindingClass {
         }
     }
 
+    async updateUserDetails(userId, newUserName, newUserBio, newUserGroups, newUserRoles, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can change user details.");
+            const response = await this.axiosClient.put(`users/${userId}`, {
+                userId: userId,
+                name: newUserName,
+                bio: newUserBio,
+                groups: newUserGroups,
+                roles: newUserRoles,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
         /**
          * Search for a song.
          * @param criteria A string containing search criteria to pass to the API.

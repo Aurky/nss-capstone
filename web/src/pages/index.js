@@ -2,6 +2,7 @@ import BulletinBoardClient from '../api/bulletinBoardClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
+import Authenticator from "../api/authenticator";
 
 
 /*
@@ -26,8 +27,8 @@ class Index extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount'], this);
-
+        this.bindClassMethods(['mount', 'submit'], this);
+        this.auth = new Authenticator();
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this.dataStore.addChangeListener(this.displaySearchResults);
@@ -38,14 +39,36 @@ class Index extends BindingClass {
      * Add the header to the page and load the MusicPlaylistClient.
      */
     mount() {
-        // Wire up the form's 'submit' event and the button's 'click' event to the search method.
+
 //        document.getElementById('search-playlists-form').addEventListener('submit', this.search);
-//        document.getElementById('search-btn').addEventListener('click', this.search);
+        document.getElementById('home-page-btn').addEventListener('click', this.submit);
 
         this.header.addHeaderToPage();
 
         this.client = new BulletinBoardClient();
 
+    }
+
+    async submit(evt) {
+        evt.preventDefault();
+
+        const errorMessageDisplay = document.getElementById("error-message");
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
+
+//        const homePageButton = document.getElementById('home-page-button');
+//        const origButtonText = homePageButton.innerText;
+//        homePageButton.innerText = 'Loading...';
+
+        const name = await this.auth.getCurrentUserName;
+
+        const user = await this.client.createUser(name, (error) => {
+//            homePageButton.innerText = origButtonText;
+            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            errorMessageDisplay.classList.remove('hidden');
+        });
+
+        this.dataStore.set('user', user);
     }
 }
 
