@@ -102,10 +102,7 @@ class UserSetting extends BindingClass {
 
         document.getElementById('save-changes-btn').innerText = 'Submitting Changes...';
         location.reload();
-
     }
-
-
 }
 
 

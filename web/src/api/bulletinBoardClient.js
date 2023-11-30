@@ -7,7 +7,7 @@ export default class BulletinBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd', 'updateAdDetails', 'getAd'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -80,7 +80,7 @@ export default class BulletinBoardClient extends BindingClass {
     async getUser(id, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get users.");
-            const response = await this.axiosClient.get(`users/${id}`, {
+            const response = await this.axiosClient.get(`users/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -126,6 +126,41 @@ export default class BulletinBoardClient extends BindingClass {
                 }
             });
             return response.data.ad;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getAd(id, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get ads.");
+            const response = await this.axiosClient.get(`ad/${adId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdTags, newAdSalary, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can change ad details.");
+            const response = await this.axiosClient.put(`ads/${adId}`, {
+                adId: adId,
+                name: newAdName,
+                description: newAdDescription,
+                location: newAdLocation,
+                tags: newAdTags,
+                salary: newAdSalary,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.user;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

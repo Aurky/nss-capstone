@@ -45,3 +45,5 @@
 * CreateAd is mostly wired up - currently receiving a network error on create submit.
   * There's a good chance the html is setup odd to handle it with the hidden error and error-message placement?
       * Going to continue on wiring the other pages so that when I start solving the similar issues on one page, the rest will also be manageable.
+* Update ad is wired up
+* Noticed something odd may be happening with the redirect methods, but are they being used? Double check next session.

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="assets/homePage.js"></script>
+    <script type="text/javascript" src="assets/updateAd.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -10,17 +10,24 @@
 <div class="card">
     <h2>Create Ad</h2>
     <form class="card-content" id="userDetails-form">
+        <p class="hidden error" id="error-message"> </p>
         <p class="form-field">
             <label>Enter Ad Updates</label>
-            <input type="text" class="validated-field" id="ad-name" placeholder="name">
-            <input type="text" class="validated-field" id="ad-description" placeholder="description">
-            <input type="text" class="validated-field" id="ad-location" placeholder="location">
-            <input type="text" class="validated-field" id="ad-tags" placeholder="tags">
-            <input type="text" class="validated-field" id="ad-salary" placeholder="salary">
+
+            <h4 id="ad-name"></h4>
+            <input type="text" class="validated-field" id="ad-name-field" placeholder="name"><br>
+            <h4 id="ad-description"></h4>
+            <input type="text" class="validated-field" id="ad-description-field" placeholder="description"><br>
+            <h4 id="ad-location"></h4>
+            <input type="text" class="validated-field" id="ad-location-field" placeholder="location"><br>
+            <h4 id="ad-tags"></h4>
+            <input type="text" class="validated-field" id="ad-tags-field" placeholder="tags">
+            <h4 id="ad-salary"></h4>
+            <input type="text" class="validated-field" id="ad-salary-field" placeholder="salary"><br>
         </p>
     </form>
     <p class="button-group">
-        <a href="viewAd.html" class="button" id="save-changes-btn">Save Changes</a>
+        <a href="#" class="button" id="save-changes-btn">Save Changes</a>
     </p>
 </div>
 </body>
