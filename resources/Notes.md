@@ -47,3 +47,6 @@
       * Going to continue on wiring the other pages so that when I start solving the similar issues on one page, the rest will also be manageable.
 * Update ad is wired up
 * Noticed something odd may be happening with the redirect methods, but are they being used? Double check next session.
+
+### Thurs 11-30
+* Got the front end wired up with creating a user - fixed the issue. I had the template looking to post through an id rather than just the table.gg

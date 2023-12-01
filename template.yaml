@@ -253,7 +253,7 @@ Resources:
         BulletinBoardService:
           Type: Api
           Properties:
-            Path: /users/{userId}
+            Path: /users
             Method: post
 
   GetUserLambda:

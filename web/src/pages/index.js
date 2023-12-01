@@ -31,7 +31,7 @@ class Index extends BindingClass {
         this.auth = new Authenticator();
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        this.dataStore.addChangeListener(this.displaySearchResults);
+
         console.log("index constructor");
     }
 
