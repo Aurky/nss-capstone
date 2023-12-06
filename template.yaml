@@ -314,7 +314,7 @@ Resources:
         BulletinBoardService:
           Type: Api
           Properties:
-            Path: /ads/{adId}
+            Path: /ads
             Method: post
 
   GetAdLambda:

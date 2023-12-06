@@ -21,7 +21,13 @@ public class CreateAdLambda
                     return input.fromUserClaims(claims ->
                             CreateAdRequest.builder()
                                     .withName(unauthenticatedRequest.getName())
-                                    .withUserId(unauthenticatedRequest.getUserId())
+                                    .withUserId(claims.get("email"))
+                                    .withAdId(unauthenticatedRequest.getAdId())
+                                    .withDescription(unauthenticatedRequest.getDescription())
+                                    .withLocation(unauthenticatedRequest.getLocation())
+                                    .withVenue(unauthenticatedRequest.getVenue())
+                                    .withSalary(unauthenticatedRequest.getSalary())
+                                    .withTags(unauthenticatedRequest.getTags())
                                     .build());
                 },
                 (request, serviceComponent) ->

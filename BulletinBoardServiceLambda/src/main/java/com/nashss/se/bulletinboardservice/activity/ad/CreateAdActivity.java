@@ -12,7 +12,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 import javax.inject.Inject;
 public class CreateAdActivity {
     private final Logger log = LogManager.getLogger();
@@ -44,15 +46,20 @@ public class CreateAdActivity {
     public CreateAdResult handleRequest(final CreateAdRequest createAdRequest) {
         log.info("Received CreateAdRequest {}", createAdRequest);
 
+        Set<String> tags = null;
+        if (createAdRequest.getTags() != null) {
+            tags = new HashSet<>(createAdRequest.getTags());
+        }
+
         Ad newAd = new Ad();
         newAd.setAdId(BullitenBoardServiceUtils.generateAdId());
         newAd.setName(createAdRequest.getName());
-        newAd.setDescription("");
-        newAd.setSalary(0.0);
-        newAd.setLocation("");
-        newAd.setVenue("");
+        newAd.setDescription(createAdRequest.getDescription());
+        newAd.setSalary(createAdRequest.getSalary());
+        newAd.setLocation(createAdRequest.getLocation());
+        newAd.setVenue(createAdRequest.getVenue());
         newAd.setUserId(createAdRequest.getUserId());
-        newAd.setTags(new HashSet<>());
+        newAd.setTags(tags);
 
         adDao.saveAd(newAd);
 

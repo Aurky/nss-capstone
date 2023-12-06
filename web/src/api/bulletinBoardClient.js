@@ -111,15 +111,16 @@ export default class BulletinBoardClient extends BindingClass {
         }
     }
 
-    async createAd(adName, adDescription, adLocation, adTags, adSalary, errorCallback) {
+    async createAd(adName, adDescription, adLocation, adVenue, adTags, adSalary, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can create ads.");
             const response = await this.axiosClient.post(`ads`, {
                 name: adName,
                 description: adDescription,
                 location: adLocation,
+                venue: adVenue,
                 tags: adTags,
-                salary: adSalary
+                salary: adSalary,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -134,7 +135,7 @@ export default class BulletinBoardClient extends BindingClass {
     async getAd(id, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get ads.");
-            const response = await this.axiosClient.get(`ad/${adId}`, {
+            const response = await this.axiosClient.get(`ads/${adId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

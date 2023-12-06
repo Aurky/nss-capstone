@@ -5,7 +5,7 @@ export default class Authenticator extends BindingClass {
     constructor() {
         super();
 
-        const methodsToBind = ['getCurrentUserInfo', 'getCurrentUserName'];
+        const methodsToBind = ['getCurrentUserInfo', 'getCurrentUserName', 'getCurrentUserEmail'];
         this.bindClassMethods(methodsToBind, this);
 
         this.configureCognito();
@@ -22,6 +22,12 @@ export default class Authenticator extends BindingClass {
         const { email, name } = congnitoUser.signInUserSession.idToken.payload;
         return { name };
     }
+
+    async getCurrentUserEmail() {
+            const congnitoUser = await Auth.currentAuthenticatedUser();
+            const { email, name } = congnitoUser.signInUserSession.idToken.payload;
+            return { email };
+        }
 
     async isUserLoggedIn() {
         try {

@@ -47,10 +47,18 @@ class CreateAd extends BindingClass {
         const adName = document.getElementById('ad-name').value;
         const adDescription = document.getElementById('ad-description').value;
         const adLocation = document.getElementById('ad-location').value;
+        const adVenue = document.getElementById('ad-venue').value;
         const adTags = document.getElementById('ad-tags').value;
         const adSalary = document.getElementById('ad-salary').value;
 
-        const ad = await this.client.createAd(adName, adDescription, adLocation, adTags, adSalary, (error) => {
+        let tags;
+        if (adTags.length < 1) {
+            tags = null;
+        } else {
+            tags = adTags.split(/\s*,\s*/);
+        }
+
+        const ad = await this.client.createAd(adName, adDescription, adLocation, adVenue, tags, adSalary, (error) => {
             createButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
