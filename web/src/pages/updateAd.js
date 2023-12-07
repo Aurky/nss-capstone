@@ -16,7 +16,7 @@ class UpdateAd extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'submitChanges', 'addAdNameToPage', 'addAdDescriptionToPage', 'addAdLocationToPage', 'addAdTagsToPage', 'addAdSalaryToPage', 'redirectToViewAd'], this);
+        this.bindClassMethods(['mount', 'submitChanges', 'addAdNameToPage', 'addAdDescriptionToPage', 'addAdLocationToPage', 'addAdTagsToPage', 'addAdSalaryToPage', 'redirectToViewAd', 'clientLoaded'], this);
 
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
@@ -25,7 +25,7 @@ class UpdateAd extends BindingClass {
         this.dataStore.addChangeListener(this.addAdLocationToPage);
         this.dataStore.addChangeListener(this.addAdTagsToPage);
         this.dataStore.addChangeListener(this.addAdSalaryToPage);
-        this.dataStore.addChangeListener(this.redirectToViewAd)
+        this.dataStore.addChangeListener(this.redirectToViewAd);
         console.log("updateAd constructor");
     }
 
@@ -88,7 +88,12 @@ class UpdateAd extends BindingClass {
         }
 
 
-    async submitChanges() {
+    async submitChanges(evt) {
+        evt.preventDefault();
+
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
 
         const ad = this.dataStore.get('ad');
         if (ad == null) {
@@ -100,17 +105,23 @@ class UpdateAd extends BindingClass {
         const newAdName = document.getElementById('ad-name-field').value;
         const newAdDescription = document.getElementById('ad-description-field').value;
         const newAdLocation = document.getElementById('ad-location-field').value;
+        const newAdVenue = document.getElementById('ad-venue-field').value;
         const newAdTags = document.getElementById('ad-tags-field').value;
         const newAdSalary = document.getElementById('ad-salary-field').value;
 
-        const errorMessageDisplay = document.getElementById('error-message');
-        errorMessageDisplay.innerText = ``;
-        errorMessageDisplay.classList.add('hidden');
+        let tags;
+        if (newAdTags.length < 1) {
+            tags = null;
+        } else {
+            tags = newAdTags.split(/\s*,\s*/);
+        }
 
         const updatedAd = await this.client.updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdTags, newAdSalary, (error) => {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
+
+        this.dataStore.set('ad', ad);
 
         document.getElementById('save-changes-btn').innerText = 'Submitting Changes...';
         location.reload();

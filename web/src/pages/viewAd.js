@@ -16,25 +16,21 @@ class ViewAd extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'addAdNameToPage', 'addAdDescriptionToPage', 'clientLoaded'], this);
+        this.bindClassMethods(['mount', 'clientLoaded', 'deleteAd', 'redirectToUpdateAd', 'updateAd'], this);
 
         this.dataStore = new DataStore();
-        this.dataStore.addChangeListener(this.addAdNameToPage);
-        this.dataStore.addChangeListener(this.addAdDescriptionToPage);
         this.header = new Header(this.dataStore);
+        this.dataStore.addChangeListener(this.redirectToUpdateAd);
+        this.dataStore.addChangeListener(this.deleteAd);
 
-        console.log("viewAd constructor");
     }
 
     async clientLoaded() {
         const urlParams = new URLSearchParams(window.location.search);
         const adId = urlParams.get('id');
-        console.log(adId);
         document.getElementById('ad-name').innerText = "Loading Ad...";
 //        document.getElementById('ad-owner').innerText = "Loading Owner...";
-        console.log(adId);
         const ad = await this.client.getAd(adId);
-        console.log(ad);
 //        this.datastore.set('ad', ad);
         document.getElementById('ad-name').innerText = ad.name;
 //        document.getElementById('ad-owner').innerText = ad.userId;
@@ -47,33 +43,66 @@ class ViewAd extends BindingClass {
 
     mount() {
 
+        document.getElementById('delete-ad-btn').addEventListener('click', this.deleteAd);
+        document.getElementById('update-ad-btn').addEventListener('click', this.updateAd);
+
         this.header.addHeaderToPage();
         this.client = new BulletinBoardClient();
         this.clientLoaded();
 
     }
 
-    addAdNameToPage() {
-        const ad = this.datastore.get('ad');
-        if (ad == null) {
-            return;
-        }
-        document.getElementById('ad-name').innerText = ad.name;
+    async deleteAd(evt) {
+        evt.preventDefault();
+
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
+
+        const deleteButton = document.getElementById('delete-ad-btn');
+        const origButtonText = deleteButton.innerText;
+        deleteButton.innerText = 'Deleting...';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const adId = urlParams.get('id');
+//        const ad = await this.client.getAd(adId);
+
+        this.client.deleteAd(adId, (error) => {
+            deleteButton.innerText = origButtonText;
+            errorMessageDisplay.innerText = `Error: ${error.message}`;
+            errorMessageDisplay.classList.remove('hidden');
+        });
+    }
+
+    async updateAd(evt) {
+        evt.preventDefault();
+
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
+
+        const updateButton = document.getElementById('update-ad-btn');
+        const origButtonText = updateButton.innerText;
+        updateButton.innerText = 'Redirecting...';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const adId = urlParams.get('id');
+        const ad = await this.client.getAd(adId);
+
+        this.dataStore.set('ad', ad);
+
+
 
     }
 
-    addAdDescriptionToPage() {
-            const ad = this.datastore.get('ad');
-            if (ad == null) {
-                return;
-            }
-            document.getElementById('ad-description').innerText = ad.description;
+    redirectToUpdateAd() {
+        const ad = this.dataStore.get('ad');
+        if (ad != null) {
+            window.location.href = `/updateAd.html?id=${ad.adId}`;
         }
-
+    }
 
 }
-
-
 
 const main = async () => {
     const viewAd = new ViewAd();

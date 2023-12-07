@@ -7,7 +7,7 @@ export default class BulletinBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd', 'updateAdDetails', 'getAd'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd', 'updateAdDetails', 'getAd', 'deleteAd'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -133,10 +133,8 @@ export default class BulletinBoardClient extends BindingClass {
     }
 
     async getAd(adId, errorCallback) {
-    console.log(adId);
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get ads.");
-            console.log(adId);
             const response = await this.axiosClient.get(`ads/${adId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -164,6 +162,20 @@ export default class BulletinBoardClient extends BindingClass {
                 }
             });
             return response.data.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async deleteAd(adId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get ads.");
+            const response = await this.axiosClient.delete(`ads/${adId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.ad;
         } catch (error) {
             this.handleError(error, errorCallback)
         }

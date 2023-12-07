@@ -25,6 +25,7 @@ public class DeleteAdRequest {
     public String toString() {
         return "DeleteAdRequest{" +
                 "adId='" + adId +
+                "userId='" + userId +
                 '}';
     }
 
