@@ -69,9 +69,8 @@ class CreateAd extends BindingClass {
 
     redirectToViewAd() {
         const ad = this.dataStore.get('ad');
-
         if (ad != null) {
-            window.location.href = '/viewAd.html?id=${ad.adId}';
+            window.location.href = `/viewAd.html?id=${ad.adId}`;
         }
     }
 }

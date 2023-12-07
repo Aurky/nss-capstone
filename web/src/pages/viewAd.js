@@ -16,18 +16,23 @@ class ViewAd extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'addAdToPage', 'clientLoaded'], this);
+        this.bindClassMethods(['mount', 'addAdNameToPage', 'addAdDescriptionToPage', 'clientLoaded'], this);
 
         this.dataStore = new DataStore();
+        this.dataStore.addChangeListener(this.addAdNameToPage);
+        this.dataStore.addChangeListener(this.addAdDescriptionToPage);
         this.header = new Header(this.dataStore);
-        this.dataStore.addChangeListener(this.addAdToPage);
+
         console.log("viewAd constructor");
     }
 
     async clientLoaded() {
         const urlParams = new URLSearchParams(window.location.search);
-        const adId = urlParams.get('ad');
+        const adId = urlParams.get('id');
+        console.log(adId);
         document.getElementById('ad-name').innerText = "Loading Ad...";
+        document.getElementById('ad-owner').innerText = "Loading Owner...";
+        console.log(adId);
         const ad = await this.client.getAd(adId);
         this.datastore.set('ad', ad);
 
@@ -36,21 +41,29 @@ class ViewAd extends BindingClass {
     mount() {
 
         this.header.addHeaderToPage();
-
         this.client = new BulletinBoardClient();
+        this.clientLoaded();
 
     }
 
-    addAdToPage() {
+    addAdNameToPage() {
         const ad = this.datastore.get('ad');
         if (ad == null) {
             return;
         }
-
         document.getElementById('ad-name').innerText = ad.name;
-        document.getElementById('ad-owner').innerText = ad.userId;
-        document.getElementById('location').innerText = ad.location;
+
     }
+
+    addAdDescriptionToPage() {
+            const ad = this.datastore.get('ad');
+            if (ad == null) {
+                return;
+            }
+            document.getElementById('ad-description').innerText = ad.description;
+        }
+
+
 }
 
 

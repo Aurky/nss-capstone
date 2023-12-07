@@ -11,7 +11,7 @@ import com.nashss.se.bulletinboardservice.lambda.LambdaResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class GetAdLamda extends LambdaActivityRunner<GetAdRequest, GetAdResult>
+public class GetAdLambda extends LambdaActivityRunner<GetAdRequest, GetAdResult>
         implements RequestHandler<AuthenticatedLambdaRequest<GetAdRequest>, LambdaResponse> {
 
     private final Logger log = LogManager.getLogger();

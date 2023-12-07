@@ -132,15 +132,17 @@ export default class BulletinBoardClient extends BindingClass {
         }
     }
 
-    async getAd(id, errorCallback) {
+    async getAd(adId, errorCallback) {
+    console.log(adId);
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get ads.");
+            console.log(adId);
             const response = await this.axiosClient.get(`ads/${adId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            return response.data.user;
+            return response.data.ad;
         } catch (error) {
             this.handleError(error, errorCallback)
         }
