@@ -31,12 +31,18 @@ class ViewAd extends BindingClass {
         const adId = urlParams.get('id');
         console.log(adId);
         document.getElementById('ad-name').innerText = "Loading Ad...";
-        document.getElementById('ad-owner').innerText = "Loading Owner...";
+//        document.getElementById('ad-owner').innerText = "Loading Owner...";
         console.log(adId);
         const ad = await this.client.getAd(adId);
         console.log(ad);
-        this.datastore.set('ad', ad);
-
+//        this.datastore.set('ad', ad);
+        document.getElementById('ad-name').innerText = ad.name;
+//        document.getElementById('ad-owner').innerText = ad.userId;
+        document.getElementById('ad-description').innerText = ad.description;
+        document.getElementById('ad-location').innerText = ad.location;
+        document.getElementById('ad-venue').innerText = ad.venue;
+        document.getElementById('ad-tags').innerText = ad.tags;
+        document.getElementById('ad-salary').innerText = ad.salary;
     }
 
     mount() {
