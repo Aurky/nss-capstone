@@ -29,11 +29,8 @@ class ViewAd extends BindingClass {
         const urlParams = new URLSearchParams(window.location.search);
         const adId = urlParams.get('id');
         document.getElementById('ad-name').innerText = "Loading Ad...";
-//        document.getElementById('ad-owner').innerText = "Loading Owner...";
         const ad = await this.client.getAd(adId);
-//        this.datastore.set('ad', ad);
         document.getElementById('ad-name').innerText = ad.name;
-//        document.getElementById('ad-owner').innerText = ad.userId;
         document.getElementById('ad-description').innerText = ad.description;
         document.getElementById('ad-location').innerText = ad.location;
         document.getElementById('ad-venue').innerText = ad.venue;

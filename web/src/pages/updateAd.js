@@ -16,25 +16,24 @@ class UpdateAd extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'submitChanges', 'addAdNameToPage', 'addAdDescriptionToPage', 'addAdLocationToPage', 'addAdTagsToPage', 'addAdSalaryToPage', 'redirectToViewAd', 'clientLoaded'], this);
+        this.bindClassMethods(['mount', 'submitChanges', 'redirectToViewAd', 'clientLoaded'], this);
 
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        this.dataStore.addChangeListener(this.addAdNameToPage);
-        this.dataStore.addChangeListener(this.addAdDescriptionToPage);
-        this.dataStore.addChangeListener(this.addAdLocationToPage);
-        this.dataStore.addChangeListener(this.addAdTagsToPage);
-        this.dataStore.addChangeListener(this.addAdSalaryToPage);
         this.dataStore.addChangeListener(this.redirectToViewAd);
-        console.log("updateAd constructor");
     }
 
     async clientLoaded() {
         const urlParams = new URLSearchParams(window.location.search);
         const adId = urlParams.get('id');
         document.getElementById('ad-name').innerText = "Loading Ad Details...";
-        const user = await this.client.getAd(adId);
-        this.dataStore.set('ad', ad);
+        const ad = await this.client.getAd(adId);
+        document.getElementById('ad-name').innerText = ad.name;
+        document.getElementById('ad-description').innerText = ad.description;
+        document.getElementById('ad-location').innerText = ad.location;
+        document.getElementById('ad-venue').innerText = ad.venue;
+        document.getElementById('ad-tags').innerText = ad.tags;
+        document.getElementById('ad-salary').innerText = ad.salary;
     }
 
     mount() {
@@ -42,51 +41,10 @@ class UpdateAd extends BindingClass {
         document.getElementById('save-changes-btn').addEventListener('click', this.submitChanges);
 
         this.header.addHeaderToPage();
-
         this.client = new BulletinBoardClient();
+        this.clientLoaded();
 
     }
-
-    addAdNameToPage() {
-            const user = this.dataStore.get('ad');
-            if (user == null) {
-                return;
-            }
-            document.getElementById('ad-name').innerText = ad.name;
-        }
-
-    addAdDescriptionToPage() {
-            const user = this.dataStore.get('ad');
-            if (user == null) {
-                return;
-            }
-            document.getElementById('ad-description').innerText = ad.description;
-        }
-
-    addAdLocationToPage() {
-            const user = this.dataStore.get('ad');
-            if (user == null) {
-                return;
-            }
-            document.getElementById('ad-location').innerText = ad.location;
-        }
-
-    addAdTagsToPage() {
-            const user = this.dataStore.get('ad');
-            if (user == null) {
-                return;
-            }
-            document.getElementById('ad-tags').innerText = ad.tags;
-        }
-
-    addAdSalaryToPage() {
-            const user = this.dataStore.get('ad');
-            if (user == null) {
-                return;
-            }
-            document.getElementById('ad-salary').innerText = ad.salary;
-        }
-
 
     async submitChanges(evt) {
         evt.preventDefault();
@@ -94,6 +52,10 @@ class UpdateAd extends BindingClass {
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
+
+        const updateButton = document.getElementById('save-changes-btn');
+        const origButtonText = updateButton.innerText;
+        updateButton.innerText = 'Updating...';
 
         const ad = this.dataStore.get('ad');
         if (ad == null) {
@@ -116,15 +78,15 @@ class UpdateAd extends BindingClass {
             tags = newAdTags.split(/\s*,\s*/);
         }
 
-        const updatedAd = await this.client.updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdTags, newAdSalary, (error) => {
+        const updatedAd = await this.client.updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdVenue, newAdTags, newAdSalary, (error) => {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
 
-        this.dataStore.set('ad', ad);
+        this.dataStore.set('ad', updateAd);
 
-        document.getElementById('save-changes-btn').innerText = 'Submitting Changes...';
-        location.reload();
+
+
     }
     redirectToViewAd() {
         const ad = this.dataStore.get('ad');

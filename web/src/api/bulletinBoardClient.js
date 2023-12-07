@@ -146,7 +146,7 @@ export default class BulletinBoardClient extends BindingClass {
         }
     }
 
-    async updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdTags, newAdSalary, errorCallback) {
+    async updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdVenue, newAdTags, newAdSalary, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can change ad details.");
             const response = await this.axiosClient.put(`ads/${adId}`, {
@@ -154,6 +154,7 @@ export default class BulletinBoardClient extends BindingClass {
                 name: newAdName,
                 description: newAdDescription,
                 location: newAdLocation,
+                venue: newAdVenue,
                 tags: newAdTags,
                 salary: newAdSalary,
             }, {
