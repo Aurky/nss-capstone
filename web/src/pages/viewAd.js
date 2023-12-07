@@ -34,6 +34,7 @@ class ViewAd extends BindingClass {
         document.getElementById('ad-owner').innerText = "Loading Owner...";
         console.log(adId);
         const ad = await this.client.getAd(adId);
+        console.log(ad);
         this.datastore.set('ad', ad);
 
     }
