@@ -62,13 +62,15 @@ class ViewAd extends BindingClass {
 
         const urlParams = new URLSearchParams(window.location.search);
         const adId = urlParams.get('id');
-//        const ad = await this.client.getAd(adId);
 
         this.client.deleteAd(adId, (error) => {
             deleteButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
+
+        window.location.href = `/homePage.html`;
+
     }
 
     async updateAd(evt) {

@@ -174,10 +174,13 @@ export default class BulletinBoardClient extends BindingClass {
             const response = await this.axiosClient.delete(`ads/${adId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
+                },
+                data: {}
             });
+
             return response.data.ad;
         } catch (error) {
+            console.error('DELETE error:', error);
             this.handleError(error, errorCallback)
         }
     }
