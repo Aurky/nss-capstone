@@ -14,7 +14,7 @@ public class AdModel {
     private final String userId;
     private final Set<String> tags;
 
-    private AdModel(String adId, String name, String description, Double salary, String location, String venue, String userId, Set<String> tags) {
+    private AdModel(String adId, String name, String description, String location, String venue, Set<String> tags, Double salary, String userId) {
         this.adId = adId;
         this.name = name;
         this.description = description;
@@ -139,7 +139,7 @@ public class AdModel {
         }
 
         public AdModel build() {
-            return new AdModel(adId, name, description, salary, location, venue, userId, tags);
+            return new AdModel(adId, name, description, location, venue, tags, salary, userId);
         }
     }
 }

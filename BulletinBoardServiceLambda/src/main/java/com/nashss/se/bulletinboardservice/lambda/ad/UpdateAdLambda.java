@@ -20,6 +20,7 @@ public class UpdateAdLambda
                     UpdateAdRequest unauthenticatedRequest = input.fromBody(UpdateAdRequest.class);
                     return input.fromUserClaims(claims ->
                             UpdateAdRequest.builder()
+                                    .withUserId(claims.get("email"))
                                     .withAdId(unauthenticatedRequest.getAdId())
                                     .withName(unauthenticatedRequest.getName())
                                     .withDescription(unauthenticatedRequest.getDescription())
@@ -27,7 +28,6 @@ public class UpdateAdLambda
                                     .withVenue(unauthenticatedRequest.getVenue())
                                     .withSalary(unauthenticatedRequest.getSalary())
                                     .withTags(unauthenticatedRequest.getTags())
-                                    .withUserId(claims.get("email"))
                                     .build());
                 },
                 (request, serviceComponent) ->

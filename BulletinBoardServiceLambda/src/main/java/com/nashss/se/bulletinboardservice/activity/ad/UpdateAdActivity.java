@@ -12,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UpdateAdActivity {
     private final Logger log = LogManager.getLogger();
@@ -25,6 +27,10 @@ public class UpdateAdActivity {
     public UpdateAdResult handleRequest(final UpdateAdRequest updateAdRequest) {
         log.info("Received UpdateAdRequest {}", updateAdRequest);
 
+        Set<String> tags = null;
+        if (updateAdRequest.getTags() != null) {
+            tags = new HashSet<>(updateAdRequest.getTags());
+        }
 
         Ad ad = adDao.getAd(updateAdRequest.getUserId(), updateAdRequest.getAdId());
 
@@ -33,11 +39,12 @@ public class UpdateAdActivity {
         ad.setSalary(updateAdRequest.getSalary());
         ad.setLocation(updateAdRequest.getLocation());
         ad.setVenue(updateAdRequest.getVenue());
-        ad.setTags(updateAdRequest.getTags());
+        ad.setTags(tags);
         ad = adDao.saveAd(ad);
 
+        AdModel adModel = new ModelConverter().toAdModel(ad);
         return UpdateAdResult.builder()
-                .withAd(new ModelConverter().toAdModel(ad))
+                .withAd(adModel)
                 .build();
     }
 }

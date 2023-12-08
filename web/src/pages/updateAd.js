@@ -57,12 +57,8 @@ class UpdateAd extends BindingClass {
         const origButtonText = updateButton.innerText;
         updateButton.innerText = 'Updating...';
 
-        const ad = this.dataStore.get('ad');
-        if (ad == null) {
-            return;
-        }
-
-        const adId = ad.adId;
+        const urlParams = new URLSearchParams(window.location.search);
+        const adId = urlParams.get('id');
 
         const newAdName = document.getElementById('ad-name-field').value;
         const newAdDescription = document.getElementById('ad-description-field').value;
@@ -78,16 +74,18 @@ class UpdateAd extends BindingClass {
             tags = newAdTags.split(/\s*,\s*/);
         }
 
-        const updatedAd = await this.client.updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdVenue, newAdTags, newAdSalary, (error) => {
+        const updatedAd = await this.client.updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdVenue, tags, newAdSalary, (error) => {
+            updateButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
 
-        this.dataStore.set('ad', updateAd);
-
+        this.dataStore.set('ad', updatedAd);
+        window.location.href = `/viewAd.html?id=${adId}`;
 
 
     }
+
     redirectToViewAd() {
         const ad = this.dataStore.get('ad');
         if (ad != null) {

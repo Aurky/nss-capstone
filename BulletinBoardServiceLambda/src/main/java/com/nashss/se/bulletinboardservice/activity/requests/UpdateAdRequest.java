@@ -16,7 +16,7 @@ public class UpdateAdRequest {
     private final Double salary;
     private final Set<String> tags;
 
-    private UpdateAdRequest(String userId, String name, String adId, String description, String location, String venue, Double salary, Set<String> tags) {
+    private UpdateAdRequest(String userId, String name, String adId, String description, String location, String venue, Set<String> tags, Double salary) {
         this.userId = userId;
         this.name = name;
         this.adId = adId;
@@ -68,8 +68,8 @@ public class UpdateAdRequest {
                 "description='" + description + '\'' +
                 "location='" + location + '\'' +
                 "venue='" + venue + '\'' +
-                "salary='" + salary + '\'' +
                 "tags='" + tags + '\'' +
+                "salary='" + salary + '\'' +
                 '}';
     }
 
@@ -130,7 +130,7 @@ public class UpdateAdRequest {
         }
 
         public UpdateAdRequest build() {
-            return new UpdateAdRequest(userId, name, adId, description, location, venue, salary, tags);
+            return new UpdateAdRequest(userId, name, adId, description, location, venue, tags, salary);
         }
     }
 }
