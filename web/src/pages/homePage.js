@@ -40,6 +40,9 @@ class HomePage extends BindingClass {
         const userId = await this.authenticator.getCurrentUserEmail();
         const user = await this.client.getUser(userId);
         console.log(user);
+        const adList = user.ads;
+        console.log(adList);
+        document.getElementById('ad-list').innerText = adList;
     }
 }
 
