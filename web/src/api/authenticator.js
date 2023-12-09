@@ -26,7 +26,7 @@ export default class Authenticator extends BindingClass {
     async getCurrentUserEmail() {
             const congnitoUser = await Auth.currentAuthenticatedUser();
             const { email, name } = congnitoUser.signInUserSession.idToken.payload;
-            return { email };
+            return email;
         }
 
     async isUserLoggedIn() {

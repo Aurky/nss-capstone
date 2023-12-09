@@ -16,7 +16,7 @@ class UserSetting extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'submitChanges', 'addUserNameToPage', 'addUserBioToPage', 'addUserGroupsToPage', 'addUserRolesToPage'], this);
+        this.bindClassMethods(['mount', 'submitChanges'], this);
 
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
@@ -32,7 +32,6 @@ class UserSetting extends BindingClass {
         const userId = urlParams.get('id');
         document.getElementById('user-name').innerText = "Loading User Details...";
         const user = await this.client.getUser(userId);
-        this.dataStore.set('user', user);
     }
 
     mount() {
@@ -43,38 +42,6 @@ class UserSetting extends BindingClass {
 
         this.client = new BulletinBoardClient();
 
-    }
-
-    addUserNameToPage() {
-        const user = this.dataStore.get('user');
-        if (user == null) {
-            return;
-        }
-        document.getElementById('user-name').innerText = user.name;
-    }
-
-    addUserBioToPage() {
-        const user = this.dataStore.get('user');
-        if (user == null) {
-            return;
-        }
-        document.getElementById('user-bio').innerText = user.bio;
-    }
-
-    addUserGroupsToPage() {
-        const user = this.dataStore.get('user');
-        if (user == null) {
-            return;
-        }
-        document.getElementById('user-groups').innerText = user.groups;
-    }
-
-    addUserRolesToPage() {
-        const user = this.dataStore.get('user');
-        if (user == null) {
-            return;
-        }
-        document.getElementById('user-roles').innerText = user.roles;
     }
 
     async submitChanges() {

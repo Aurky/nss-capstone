@@ -2,6 +2,7 @@ import BulletinBoardClient from '../api/bulletinBoardClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
+import Authenticator from "../api/authenticator";
 
 
 
@@ -16,8 +17,9 @@ class HomePage extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount'], this);
+        this.bindClassMethods(['mount', 'clientLoaded'], this);
 
+        this.authenticator = new Authenticator();
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this.dataStore.addChangeListener(this.displaySearchResults);
@@ -30,6 +32,14 @@ class HomePage extends BindingClass {
 
         this.client = new BulletinBoardClient();
 
+        this.clientLoaded();
+
+    }
+
+    async clientLoaded() {
+        const userId = await this.authenticator.getCurrentUserEmail();
+        const user = await this.client.getUser(userId);
+        console.log(user);
     }
 }
 

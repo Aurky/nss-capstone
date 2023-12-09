@@ -77,7 +77,7 @@ export default class BulletinBoardClient extends BindingClass {
         }
     }
 
-    async getUser(id, errorCallback) {
+    async getUser(userId, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get users.");
             const response = await this.axiosClient.get(`users/${userId}`, {
