@@ -12,7 +12,7 @@ import com.nashss.se.bulletinboardservice.lambda.AuthenticatedLambdaRequest;
 import com.nashss.se.bulletinboardservice.lambda.LambdaActivityRunner;
 import com.nashss.se.bulletinboardservice.lambda.LambdaResponse;
 
-public class UpdateUserLamda extends LambdaActivityRunner<UpdateUserRequest, UpdateUserResult>
+public class UpdateUserLambda extends LambdaActivityRunner<UpdateUserRequest, UpdateUserResult>
         implements RequestHandler<AuthenticatedLambdaRequest<UpdateUserRequest>, LambdaResponse> {
 
     @Override

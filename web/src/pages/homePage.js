@@ -43,6 +43,10 @@ class HomePage extends BindingClass {
         const adList = user.ads;
         console.log(adList);
         document.getElementById('ad-list').innerText = adList;
+        document.getElementById('user-name').innerText = user.name;
+        document.getElementById('user-bio').innerText = user.bio;
+        document.getElementById('user-groups').innerText = user.groups;
+        document.getElementById('user-roles').innerText = user.roles;
     }
 }
 

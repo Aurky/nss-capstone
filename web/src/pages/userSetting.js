@@ -2,7 +2,7 @@ import BulletinBoardClient from '../api/bulletinBoardClient';
 import Header from '../components/header';
 import BindingClass from "../util/bindingClass";
 import DataStore from "../util/DataStore";
-
+import Authenticator from "../api/authenticator";
 
 
 const SEARCH_CRITERIA_KEY = 'search-criteria';
@@ -16,22 +16,25 @@ class UserSetting extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'submitChanges'], this);
-
+        this.bindClassMethods(['mount', 'submitChanges', 'clientLoaded'], this);
+        this.authenticator = new Authenticator();
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
-        this.dataStore.addChangeListener(this.addUserNameToPage);
-        this.dataStore.addChangeListener(this.addUserBioToPage);
-        this.dataStore.addChangeListener(this.addUserGroupsToPage);
-        this.dataStore.addChangeListener(this.addUserRolesToPage);
+
         console.log("userSetting constructor");
     }
 
     async clientLoaded() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get('id');
-        document.getElementById('user-name').innerText = "Loading User Details...";
+
+        const userId = await this.authenticator.getCurrentUserEmail();
         const user = await this.client.getUser(userId);
+        console.log(user);
+
+        document.getElementById('user-name').innerText = user.name;
+        document.getElementById('user-bio').innerText = user.bio;
+        document.getElementById('user-groups').innerText = user.groups;
+        document.getElementById('user-roles').innerText = user.roles;
+
     }
 
     mount() {
@@ -39,36 +42,54 @@ class UserSetting extends BindingClass {
         document.getElementById('save-changes-btn').addEventListener('click', this.submitChanges);
 
         this.header.addHeaderToPage();
-
         this.client = new BulletinBoardClient();
+        this.clientLoaded()
 
     }
 
-    async submitChanges() {
+    async submitChanges(evt) {
+        evt.preventDefault();
 
-        const user = this.dataStore.get('user');
-        if (user == null) {
-            return;
-        }
+//        const user = this.dataStore.get('user');
+//        if (user == null) {
+//            return;
+//        }
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
 
-        const userId = user.userId;
+        const updateButton = document.getElementById('save-changes-btn');
+        const origButtonText = updateButton.innerText;
+        updateButton.innerText = 'Updating...';
+
+        const userId = await this.authenticator.getCurrentUserEmail();
+        const user = await this.client.getUser(userId);
 
         const newUserName = document.getElementById('user-name-field').value;
         const newUserBio = document.getElementById('user-bio-field').value;
         const newUserGroups = document.getElementById('user-groups-field').value;
         const newUserRoles = document.getElementById('user-roles-field').value;
 
-        const errorMessageDisplay = document.getElementById('error-message');
-                errorMessageDisplay.innerText = ``;
-                errorMessageDisplay.classList.add('hidden');
+        let groups;
+        if (newUserGroups.length < 1) {
+            groups = null;
+        } else {
+            groups = newUserGroups.split(/\s*,\s*/);
+        }
 
-        const updatedUser = await this.client.updateUserDetails(userId, newUserName, newUserBio, newUserGroups, newUserRoles, (error) => {
+        let roles;
+        if (newUserRoles.length < 1) {
+            roles = null;
+        } else {
+            roles = newUserRoles.split(/\s*,\s*/);
+        }
+
+        const updatedUser = await this.client.updateUserDetails(userId, newUserName, newUserBio, groups, roles, (error) => {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
 
-        document.getElementById('save-changes-btn').innerText = 'Submitting Changes...';
-        location.reload();
+        this.dataStore.set('user', updatedUser);
     }
 }
 
