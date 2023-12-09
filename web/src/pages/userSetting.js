@@ -90,6 +90,7 @@ class UserSetting extends BindingClass {
         });
 
         this.dataStore.set('user', updatedUser);
+//        window.location.href = `/homePage.html`;
     }
 }
 
