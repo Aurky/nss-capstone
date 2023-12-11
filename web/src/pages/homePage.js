@@ -17,14 +17,13 @@ class HomePage extends BindingClass {
     constructor() {
         super();
 
-        this.bindClassMethods(['mount', 'clientLoaded', 'addAdsToPage', 'redirectToViewAd'], this);
+        this.bindClassMethods(['mount', 'clientLoaded', 'addAdsToPage', 'redirectToViewAd', 'submit'], this);
 
         this.authenticator = new Authenticator();
         this.dataStore = new DataStore();
         this.header = new Header(this.dataStore);
         this.dataStore.addChangeListener(this.redirectToViewAd);
         this.dataStore.addChangeListener(this.addAdsToPage)
-        console.log("homePage constructor");
     }
 
     mount() {
@@ -101,6 +100,19 @@ class HomePage extends BindingClass {
         if (adId != null) {
             window.location.href = `/viewAd.html?id=${adId}`;
         }
+    }
+
+    async submit(evt) {
+        evt.preventDefault();
+
+        const errorMessageDisplay = document.getElementById('error-message');
+        errorMessageDisplay.innerText = ``;
+        errorMessageDisplay.classList.add('hidden');
+
+        const adId = document.getElementById('adsSelect').value;
+        console.log("selected ads' id: " + adId);
+
+        this.dataStore.set('adId', adId);
     }
 }
 
