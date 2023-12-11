@@ -61,4 +61,12 @@ public class UserDao {
         this.dynamoDbMapper.save(user);
         return user;
     }
+
+//    public List<String> getUserGroups() {
+//        User user = new User
+//    }
+//
+//    public List<String> getUserRoles() {
+//
+//    }
 }

@@ -65,4 +65,16 @@ public class AdDao {
         this.dynamoDbMapper.delete(ad);
         return ad;
     }
+
+    public List<Ad> getUserAds(String userId) {
+        Ad ad = new Ad();
+        ad.setUserId(userId);
+
+        DynamoDBQueryExpression<Ad> dynamoDBQueryExpression = new DynamoDBQueryExpression<Ad>()
+                .withHashKeyValues(ad);
+        DynamoDBMapper mapper = new DynamoDBMapper(DynamoDbClientProvider.getDynamoDBClient());
+
+        PaginatedQueryList<Ad> adList = mapper.query(Ad.class, dynamoDBQueryExpression);
+        return adList;
+    }
 }
