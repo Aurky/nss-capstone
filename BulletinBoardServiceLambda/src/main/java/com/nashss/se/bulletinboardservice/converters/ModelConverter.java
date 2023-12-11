@@ -69,4 +69,14 @@ public class ModelConverter {
                 .withVenues(location.getVenues())
                 .build();
     }
+
+    public List<AdModel> toAdModelList(List<Ad> ads) {
+        List<AdModel> adModels = new ArrayList<>();
+
+        for (Ad ad : ads) {
+            adModels.add(toAdModel(ad));
+        }
+
+        return adModels;
+    }
 }
