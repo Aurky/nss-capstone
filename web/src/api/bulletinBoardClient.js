@@ -185,6 +185,21 @@ export default class BulletinBoardClient extends BindingClass {
         }
     }
 
+    async getAdList() {
+        try {
+                const token = await this.getTokenOrThrow("Only authenticated users can get pantries.");
+                console.log("token loaded");
+                const response = await this.axiosClient.get(`ads`, {
+                    headers: {
+                        Authorization: `Bearer ${token`
+                    }
+                });
+                return response.data.ads;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
         /**
          * Search for a song.
          * @param criteria A string containing search criteria to pass to the API.
