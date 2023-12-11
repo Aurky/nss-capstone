@@ -46,8 +46,8 @@ public class CreateUserActivity {
 
         User newUser = new User();
         newUser.setUserId(createUserRequest.getUserId());
-        newUser.setName(createUserRequest.getName());
-        newUser.setBio("");
+        newUser.setName("Please Choose a Name");
+        newUser.setBio("Please Enter a Bio");
         newUser.setAds(new ArrayList<>());
         newUser.setGroups(new ArrayList<>());
         newUser.setRoles(new ArrayList<>());

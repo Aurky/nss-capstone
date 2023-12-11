@@ -28,7 +28,7 @@ class HomePage extends BindingClass {
 
     mount() {
 
-        document.getElementById('adsSelect').addEventListener('click', this.submit);
+        document.getElementById('adsOL').addEventListener('click', this.submit);
 
         this.header.addHeaderToPage();
 
@@ -46,52 +46,76 @@ class HomePage extends BindingClass {
         console.log(ads);
         this.dataStore.set('ads', ads);
 //        document.getElementById('ad-list').innerText = ads;
-        document.getElementById('user-name').innerText = user.name;
-        document.getElementById('user-bio').innerText = user.bio;
-        document.getElementById('user-groups').innerText = user.groups;
-        document.getElementById('user-roles').innerText = user.roles;
+//        document.getElementById('user-name').innerText = "Name: " + user.name;
+//        console.log(user.name);
+//        document.getElementById('user-bio').innerText = "Bio: " + user.bio;
+//        console.log(user.bio);
+//        document.getElementById('user-groups').innerText = "Groups: " + user.groups;
+//        console.log(user.groups);
+//        document.getElementById('user-roles').innerText = "Roles: " + user.roles;
+//        console.log(user.roles);
     }
+
+//    addAdsToPage() {
+//        const ads = this.dataStore.get('ads');
+//        console.log(ads);
+//        if (ads == null) {
+//            return;
+//        }
+//
+//        document.getElementById('adsSelect').size = ads.length;
+//        let optionList = document.getElementById('adsSelect').options;
+//        let options = [
+//        {
+//            text: 'Option 1',
+//            value: 'Value 1'
+//        },
+//        {
+//            text: 'Option 2',
+//            value: 'Value 2'
+//        },
+//        {
+//            text: 'Option 3',
+//            value: 'Value 3'
+//        },
+//        {
+//            text: 'Option 4',
+//            value: 'Value 4'
+//        },
+//        {
+//            text: 'Option 5',
+//            value: 'Value 5'
+//        },
+//        {
+//            text: 'Option 6',
+//            value: 'Value 6'
+//        }
+//        ];
+//
+//        ads.forEach(ads =>
+//            optionList.add(
+//            new Option(ads.name, ads.adId)
+//        ));
+//    }
 
     addAdsToPage() {
         const ads = this.dataStore.get('ads');
         console.log(ads);
+
         if (ads == null) {
             return;
         }
 
-        document.getElementById('adsSelect').size = ads.length;
-        let optionList = document.getElementById('adsSelect').options;
-        let options = [
-        {
-            text: 'Option 1',
-            value: 'Value 1'
-        },
-        {
-            text: 'Option 2',
-            value: 'Value 2'
-        },
-        {
-            text: 'Option 3',
-            value: 'Value 3'
-        },
-        {
-            text: 'Option 4',
-            value: 'Value 4'
-        },
-        {
-            text: 'Option 5',
-            value: 'Value 5'
-        },
-        {
-            text: 'Option 6',
-            value: 'Value 6'
+        let adHtml = '';
+        let ad;
+        for (ad of ads) {
+            adHtml += `
+                <li class="ad">
+                    <span class="name">${ad.name}</span>
+                </li>
+            `;
         }
-        ];
-
-        ads.forEach(ads =>
-            optionList.add(
-            new Option(ads.name, ads.adId)
-        ));
+        document.getElementById('adsOL').innerHTML = adHtml;
     }
 
     redirectToViewAd() {
@@ -109,7 +133,7 @@ class HomePage extends BindingClass {
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
 
-        const adId = document.getElementById('adsSelect').value;
+        const adId = document.getElementById('adsOL').value;
         console.log("selected ads' id: " + adId);
 
         this.dataStore.set('adId', adId);

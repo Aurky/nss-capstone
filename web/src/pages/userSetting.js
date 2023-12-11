@@ -43,7 +43,7 @@ class UserSetting extends BindingClass {
 
         this.header.addHeaderToPage();
         this.client = new BulletinBoardClient();
-        this.clientLoaded()
+        this.clientLoaded();
 
     }
 
@@ -88,6 +88,7 @@ class UserSetting extends BindingClass {
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
+        console.log(updatedUser);
 
         this.dataStore.set('user', updatedUser);
 //        window.location.href = `/homePage.html`;
