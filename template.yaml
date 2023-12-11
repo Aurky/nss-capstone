@@ -253,7 +253,7 @@ Resources:
         BulletinBoardService:
           Type: Api
           Properties:
-            Path: /users/{userId}
+            Path: /users
             Method: post
 
   GetUserLambda:
@@ -314,7 +314,7 @@ Resources:
         BulletinBoardService:
           Type: Api
           Properties:
-            Path: /ads/{adId}
+            Path: /ads
             Method: post
 
   GetAdLambda:
@@ -440,13 +440,17 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "adId"
           AttributeType: "S"
+        - AttributeName: "userId"
+          AttributeType: "S"
         - AttributeName: "location"
           AttributeType: "S"
         - AttributeName: "venue"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "adId"
+        - AttributeName: "userId"
           KeyType: "HASH"
+        - AttributeName: "adId"
+          KeyType: "RANGE"
       BillingMode: "PAY_PER_REQUEST"
       TableName: "ads"
       GlobalSecondaryIndexes:

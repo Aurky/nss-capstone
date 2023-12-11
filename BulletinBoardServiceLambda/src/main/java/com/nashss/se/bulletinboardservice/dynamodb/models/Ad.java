@@ -21,7 +21,7 @@ public class Ad {
     private String userId;
     private Set<String> tags;
 
-    @DynamoDBHashKey(attributeName = "adId")
+    @DynamoDBRangeKey(attributeName = "adId")
     public String getAdId() {
         return adId;
     }
@@ -74,7 +74,7 @@ public class Ad {
         this.venue = venue;
     }
 
-    @DynamoDBAttribute(attributeName = "userId")
+    @DynamoDBHashKey(attributeName = "userId")
     public String getUserId() {
         return userId;
     }

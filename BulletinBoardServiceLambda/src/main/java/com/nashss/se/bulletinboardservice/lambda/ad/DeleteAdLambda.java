@@ -2,6 +2,7 @@ package com.nashss.se.bulletinboardservice.lambda.ad;
 
 import com.nashss.se.bulletinboardservice.activity.ad.DeleteAdActivity;
 import com.nashss.se.bulletinboardservice.activity.requests.DeleteAdRequest;
+import com.nashss.se.bulletinboardservice.activity.requests.GetAdRequest;
 import com.nashss.se.bulletinboardservice.activity.requests.UpdateAdRequest;
 import com.nashss.se.bulletinboardservice.activity.results.DeleteAdResult;
 
@@ -19,7 +20,10 @@ public class DeleteAdLambda extends LambdaActivityRunner<DeleteAdRequest, Delete
     public LambdaResponse handleRequest(AuthenticatedLambdaRequest<DeleteAdRequest> input, Context context) {
         return super.runActivity(
                 () -> {
-                    DeleteAdRequest unauthenticatedRequest = input.fromBody(DeleteAdRequest.class);
+                    DeleteAdRequest unauthenticatedRequest = input.fromPath(path ->
+                            DeleteAdRequest.builder()
+                                    .withAdId(path.get("adId"))
+                                    .build());
                     return input.fromUserClaims(claims ->
                             DeleteAdRequest.builder()
                                     .withUserId(claims.get("email"))

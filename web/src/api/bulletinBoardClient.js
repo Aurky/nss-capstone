@@ -7,7 +7,7 @@ export default class BulletinBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd', 'updateAdDetails', 'getAd', 'deleteAd'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -77,16 +77,110 @@ export default class BulletinBoardClient extends BindingClass {
         }
     }
 
-    async getUser(id, errorCallback) {
+    async getUser(userId, errorCallback) {
         try {
             const token = await this.getTokenOrThrow("Only authenticated users can get users.");
-            const response = await this.axiosClient.get(`users/${id}`, {
+            const response = await this.axiosClient.get(`users/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             return response.data.user;
         } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async updateUserDetails(userId, newUserName, newUserBio, newUserGroups, newUserRoles, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can change user details.");
+            const response = await this.axiosClient.put(`users/${userId}`, {
+                userId: userId,
+                name: newUserName,
+                bio: newUserBio,
+                groups: newUserGroups,
+                roles: newUserRoles,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async createAd(adName, adDescription, adLocation, adVenue, adTags, adSalary, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can create ads.");
+            const response = await this.axiosClient.post(`ads`, {
+                name: adName,
+                description: adDescription,
+                location: adLocation,
+                venue: adVenue,
+                tags: adTags,
+                salary: adSalary,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.ad;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async getAd(adId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get ads.");
+            const response = await this.axiosClient.get(`ads/${adId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.ad;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async updateAdDetails(adId, newAdName, newAdDescription, newAdLocation, newAdVenue, newAdTags, newAdSalary, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can change ad details.");
+            const response = await this.axiosClient.put(`ads/${adId}`, {
+                adId: adId,
+                name: newAdName,
+                description: newAdDescription,
+                location: newAdLocation,
+                venue: newAdVenue,
+                tags: newAdTags,
+                salary: newAdSalary,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            return response.data.user;
+        } catch (error) {
+            this.handleError(error, errorCallback)
+        }
+    }
+
+    async deleteAd(adId, errorCallback) {
+        try {
+            const token = await this.getTokenOrThrow("Only authenticated users can get ads.");
+            const response = await this.axiosClient.delete(`ads/${adId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                data: {}
+            });
+
+            return response.data.ad;
+        } catch (error) {
+            console.error('DELETE error:', error);
             this.handleError(error, errorCallback)
         }
     }

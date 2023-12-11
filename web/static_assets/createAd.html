@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="assets/homePage.js"></script>
+    <script type="text/javascript" src="assets/createAd.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -10,13 +10,15 @@
     <div class="card">
         <h2>Create Ad</h2>
         <form class="card-content" id="userDetails-form">
+            <p class="hidden error" id="error-message"> </p>
             <p class="form-field">
                 <label>Enter Ad details</label>
-                <input type="text" class="validated-field" id="ad-name" placeholder="name">
-                <input type="text" class="validated-field" id="ad-description" placeholder="description">
-                <input type="text" class="validated-field" id="ad-location" placeholder="location">
-                <input type="text" class="validated-field" id="ad-tags" placeholder="tags">
-                <input type="text" class="validated-field" id="ad-salary" placeholder="salary">
+                <input type="text" class="validated-field" id="ad-name" placeholder="name"><br>
+                <input type="text" class="validated-field" id="ad-description" placeholder="description"><br>
+                <input type="text" class="validated-field" id="ad-location" placeholder="location"><br>
+                <input type="text" class="validated-field" id="ad-venue" placeholder="venue"><br>
+                <input type="text" class="validated-field" id="ad-tags" placeholder="tags"><br>
+                <input type="text" class="validated-field" id="ad-salary" placeholder="salary"><br>
             </p>
         </form>
         <p class="button-group">

@@ -28,3 +28,25 @@
 ### Thursday 11-16
 
 ### Friday 11-17
+
+### Tuesday 11-28
+* Getting front end together
+  * All pages have a working header
+    * Currently trying to get the Login through cognito to lead directly to the homePage.html - currently looking at the env files
+
+
+### Wednesday 11-29
+* Current issue with retrieving user/creating user between entry page to the home page. Moving on to get the front end wired up for the rest of the endpoints.
+  * Not an ideal solution, however better to get work done than stare at the screen for an hour.
+* Currently displaying the current user details as headers 
+  * This is purely for testing later to make sure all things are working, this won't work long term for bio.
+    * Will need to be cleaned up.
+  * This is 'done'
+* CreateAd is mostly wired up - currently receiving a network error on create submit.
+  * There's a good chance the html is setup odd to handle it with the hidden error and error-message placement?
+      * Going to continue on wiring the other pages so that when I start solving the similar issues on one page, the rest will also be manageable.
+* Update ad is wired up
+* Noticed something odd may be happening with the redirect methods, but are they being used? Double check next session.
+
+### Thurs 11-30
+* Got the front end wired up with creating a user - fixed the issue. I had the template looking to post through an id rather than just the table.gg

@@ -2,14 +2,24 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="assets/homePage.js"></script>
+    <script type="text/javascript" src="assets/viewAd.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body class="background">
     <header class="header" id="header"></header>
+    <p class="hidden error" id="error-message"> </p>
     <div class="card">
-        <h2>View Ad Page</h2>
+        <h2 id="ad-name" ></h2>
+        <h3 id="ad-owner"></h3>
+        <div
+            class="card">
+            <h4 id="ad-description"></h4><br>
+            <h4 id="ad-location"></h4><br>
+            <h4 id="ad-venue"></h4><br>
+            <h4 id="ad-tags"></h4><br>
+            <h4 id="ad-salary"></h4><br>
+        </div>
         <p class="button-group">
             <a href="#" class="button" id="delete-ad-btn">Delete Ad</a>
             <a href="updateAd.html" class="button" id="update-ad-btn">Update Ad</a>
