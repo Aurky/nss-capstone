@@ -69,6 +69,7 @@ class Index extends BindingClass {
         });
 
         this.dataStore.set('user', user);
+        window.location.href = `/homePage.html`;
     }
 }
 
