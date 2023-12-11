@@ -7,7 +7,7 @@ export default class BulletinBoardClient extends BindingClass {
     constructor(props = {}) {
         super();
 
-        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd', 'updateAdDetails', 'getAd', 'deleteAd'];
+        const methodsToBind = ['clientLoaded', 'getIdentity', 'login', 'logout', 'createUser', 'getUser', 'updateUserDetails', 'createAd', 'updateAdDetails', 'getAd', 'deleteAd', 'getAdList'];
         this.bindClassMethods(methodsToBind, this);
 
         this.authenticator = new Authenticator();;
@@ -191,7 +191,7 @@ export default class BulletinBoardClient extends BindingClass {
                 console.log("token loaded");
                 const response = await this.axiosClient.get(`ads`, {
                     headers: {
-                        Authorization: `Bearer ${token`
+                        Authorization: `Bearer ${token}`
                     }
                 });
                 return response.data.ads;
@@ -210,9 +210,9 @@ export default class BulletinBoardClient extends BindingClass {
                 const queryParams = new URLSearchParams({ q: criteria })
                 const queryString = queryParams.toString();
 
-                const response = await this.axiosClient.get(`users/search?${queryString}`);
+                const response = await this.axiosClient.get(`ads/search?${queryString}`);
 
-                return response.data.users;
+                return response.data.ads;
             } catch (error) {
                 this.handleError(error, errorCallback)
             }
