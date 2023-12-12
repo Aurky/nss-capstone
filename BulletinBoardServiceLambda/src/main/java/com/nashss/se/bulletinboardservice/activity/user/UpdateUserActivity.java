@@ -12,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateUserActivity {
     private final Logger log = LogManager.getLogger();
@@ -25,13 +27,23 @@ public class UpdateUserActivity {
     public UpdateUserResult handleRequest(final UpdateUserRequest updateUserRequest) {
         log.info("Received UpdateUserRequest {}", updateUserRequest);
 
+        List<String> groups = null;
+        if (updateUserRequest.getGroups() != null) {
+            groups = new ArrayList<>(updateUserRequest.getGroups());
+        }
+
+        List<String> roles = null;
+        if (updateUserRequest.getRoles() != null) {
+            roles = new ArrayList<>(updateUserRequest.getRoles());
+        }
+
         User user = userDao.getUser(updateUserRequest.getUserId());
 
         user.setName(updateUserRequest.getName());
         user.setBio(updateUserRequest.getBio());
-        user.setGroups(updateUserRequest.getGroups());
+        user.setGroups(groups);
         user.setAds(updateUserRequest.getAds());
-        user.setRoles(updateUserRequest.getRoles());
+        user.setRoles(roles);
 
         return UpdateUserResult.builder()
                 .withUser(new ModelConverter().toUserModel(user))
