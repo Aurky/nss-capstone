@@ -4,6 +4,13 @@
 <head>
     <script type="text/javascript" src="assets/homePage.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        .ad-row {
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript" src="assets/homePage.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body class="background">
@@ -24,8 +31,13 @@
 <!--            <h2> Ad List Display </h2>-->
 <!--            </label>-->
 
-            <select name="ads" id="adsSelect">
-            </select><br><br>
+            <div id="adList">
+                <script>
+                    function redirectToViewAd(adId) {
+                        window.location.href = `/viewAd.html?id=${adId}`;
+                    }
+                </script>
+            </div>
         </div>
         <p class="button-group">
 <!--            <a href="userSetting.html" class="button" id="user-settings-btn">User Settings</a>-->

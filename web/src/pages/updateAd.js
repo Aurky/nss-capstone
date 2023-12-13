@@ -28,12 +28,13 @@ class UpdateAd extends BindingClass {
         const adId = urlParams.get('id');
         document.getElementById('ad-name').innerText = "Loading Ad Details...";
         const ad = await this.client.getAd(adId);
-        document.getElementById('ad-name').innerText = ad.name;
-        document.getElementById('ad-description').innerText = ad.description;
-        document.getElementById('ad-location').innerText = ad.location;
-        document.getElementById('ad-venue').innerText = ad.venue;
-        document.getElementById('ad-tags').innerText = ad.tags;
-        document.getElementById('ad-salary').innerText = ad.salary;
+        document.getElementById('ad-name').innerText = "Input Updates:";
+        document.getElementById('ad-name-field').value = ad.name;
+        document.getElementById('ad-description-field').value = ad.description;
+        document.getElementById('ad-location-field').value = ad.location;
+        document.getElementById('ad-venue-field').value = ad.venue;
+        document.getElementById('ad-tags-field').value = ad.tags;
+        document.getElementById('ad-salary-field').value = ad.salary;
     }
 
     mount() {

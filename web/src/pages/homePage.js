@@ -28,7 +28,7 @@ class HomePage extends BindingClass {
 
     mount() {
 
-        document.getElementById('adsSelect').addEventListener('click', this.submit);
+//        document.getElementById('adsSelect').addEventListener('click', this.submit);
 
         this.header.addHeaderToPage();
 
@@ -57,46 +57,77 @@ class HomePage extends BindingClass {
     }
 
     addAdsToPage() {
-        const ads = this.dataStore.get('ads');
-        console.log(ads);
-        if (ads == null) {
+        const adList = this.dataStore.get('ads');
+        const adListElement = document.getElementById('adList');
+
+        if (adList == null || adList.length === 0) {
+            const messageHtml = '<p>You do not have any ads yet!</p>';
+            adListElement.innerHTML = messageHtml;
             return;
         }
 
-        document.getElementById('adsSelect').size = ads.length;
-        let optionList = document.getElementById('adsSelect').options;
-        let options = [
-        {
-            text: 'Option 1',
-            value: 'Value 1'
-        },
-        {
-            text: 'Option 2',
-            value: 'Value 2'
-        },
-        {
-            text: 'Option 3',
-            value: 'Value 3'
-        },
-        {
-            text: 'Option 4',
-            value: 'Value 4'
-        },
-        {
-            text: 'Option 5',
-            value: 'Value 5'
-        },
-        {
-            text: 'Option 6',
-            value: 'Value 6'
-        }
-        ];
+        const textHtml = '<h6>Click an Ad below to view:</h6>';
 
-        ads.forEach(ads =>
-            optionList.add(
-            new Option(ads.name, ads.adId)
-        ));
+        let adHtml = '<table border="1"><tr><th>Ad ID</th><th>Name</th></tr>';
+
+        for (const ad of adList) {
+            let adId = ad.adId;
+            let name = ad.name;
+
+            adHtml += `
+                <tr class="ad-row" onclick="redirectToViewAd('${adId}')">
+                    <td>${adId}</td>
+                    <td>${name}</td>
+                </tr>
+            `;
+        }
+
+        adHtml += '</table>';
+
+        adListElement.innerHTML = textHtml + adHtml;
     }
+
+//    addAdsToPage() {
+////        const ads = this.dataStore.get('ads');
+////        console.log(ads);
+////        if (ads == null) {
+////            return;
+////        }
+//
+//
+////        document.getElementById('adsSelect').size = ads.length;
+//
+//        const adListElement = document.getElementById('adList');
+//
+//        if (adList == null || adList.length ===0) {
+//            const messageHtml = '<p>You do not have any ads yet!>';
+//            adListElement.innerHTML = messageHtml;
+//            return;
+//        }
+//
+//        const adListMap = {};
+//
+//
+//        const textHtml = '<h6>Click an Ad below to view</h6>';
+//
+//        let adHtml = '<table><tr><th>Ad</th>';
+//                for (const ad of adList) {
+//                    let adId = ad.adId;
+//                    let name = ad.name;
+//
+//                    adHtml += `
+//                    <tr onclick="window.location='/viewAd.html?id=${ad.adId}'">
+//                        <td>ad.name</td>
+//                    </tr>
+//                    `;
+//        }
+//
+//        adHtml += '</table';
+//
+//        adListElement.innerHTML = textHtml + adHtml;
+//
+//
+//    }
 
     redirectToViewAd() {
         const adId = this.dataStore.get('adId');
