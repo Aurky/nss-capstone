@@ -87,48 +87,6 @@ class HomePage extends BindingClass {
         adListElement.innerHTML = textHtml + adHtml;
     }
 
-//    addAdsToPage() {
-////        const ads = this.dataStore.get('ads');
-////        console.log(ads);
-////        if (ads == null) {
-////            return;
-////        }
-//
-//
-////        document.getElementById('adsSelect').size = ads.length;
-//
-//        const adListElement = document.getElementById('adList');
-//
-//        if (adList == null || adList.length ===0) {
-//            const messageHtml = '<p>You do not have any ads yet!>';
-//            adListElement.innerHTML = messageHtml;
-//            return;
-//        }
-//
-//        const adListMap = {};
-//
-//
-//        const textHtml = '<h6>Click an Ad below to view</h6>';
-//
-//        let adHtml = '<table><tr><th>Ad</th>';
-//                for (const ad of adList) {
-//                    let adId = ad.adId;
-//                    let name = ad.name;
-//
-//                    adHtml += `
-//                    <tr onclick="window.location='/viewAd.html?id=${ad.adId}'">
-//                        <td>ad.name</td>
-//                    </tr>
-//                    `;
-//        }
-//
-//        adHtml += '</table';
-//
-//        adListElement.innerHTML = textHtml + adHtml;
-//
-//
-//    }
-
     redirectToViewAd() {
         const adId = this.dataStore.get('adId');
         console.log(adId);
