@@ -52,6 +52,11 @@ class ViewAd extends BindingClass {
     async deleteAd(evt) {
         evt.preventDefault();
 
+        const confirmation = window.confirm("Are you sure you want to delete this ad?");
+        if (!confirmation) {
+            return;
+        }
+
         const errorMessageDisplay = document.getElementById('error-message');
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
