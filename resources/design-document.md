@@ -1,8 +1,11 @@
 # Project Design Doc - Music Bulletin Board Design
 
+# Disclaimer 
+* As of 1/6/24 there is code written and included in the current mvp base that allows for user details related use cases. For the mvp requirements, these lines are currently commented out, though they are mostly functional.
+
 ## 1. Problem Statement
 
-The Music Bulletin Board is a service allowing musicians to connect with their peers, within similar areas, to find work and post their needs. Users want to have the ability to detail out their 'want' ads with role needs, music genre expected, locations involved, as well as look at and respond to other user's posted ads. 
+The Music Bulletin Board is a service allowing musicians to connect with their peers, within similar areas, to find work and post their needs. Users want to have the ability to detail out their 'want' ads with role needs, music genre expected, locations involved,.. 
 
 ## 2. Top Questions to Resolve in Review
 1.) How much depth should go into a user's posted ads? Name/description/role/date/salary?
@@ -30,17 +33,16 @@ U3. As a user, I want to be able to update my ad(s) details.
 
 U4. As a user, I want to be able to delete my ad(s).
 
-U5. As a user, I want to be able to update my user profile details.
+U5. As a user, I want to be able to view my individual ad(s).
 
-U6. As a user, I want to be able to view my individual ad(s).
+U6. As a user, I want to be able to update an ad (including name, description, location, tags, salary...).
 
-U7. As a user, I want to be able to update an ad (including name, description, location, tags, salary...).
+### 3.0.5 
+#### Use cases that were written out in code but left out of mvp.
+
+U7. As a user, I want to be able to update my user profile details.
 
 U8. As a user, I want to be able to view my user details.
-
-U9. As a user, I want to be able to view ads based on area location.
-
-U10. As a user, I want to be able to view ads based on the venue location.
 
 ### 3.2  Stretch Use Cases
 
@@ -54,6 +56,16 @@ U4. As a user, I want to be able to change bulletin boards.
 
 U5. As a user, I want to view venues associated with a board.
 
+U6. As a user, I want to be able to add a date of event to my ad.
+
+U7. As a user, I want my ads to expire themselves out and auto-delete after their posted date.
+
+U8. As a user, I want to be able to add a preloaded venue to my ad.
+
+U9. As a user, I want to be able to add a preloaded location to my ad.
+
+
+
 ## 4. Project Scope
 ### 4.1 In Scope
 
@@ -66,6 +78,9 @@ U5. As a user, I want to view venues associated with a board.
 * Multiple Boards (broader than Nashville area) - mid stretch
 * Venues as an entity rather than a String - closest stretch?
 * Allow users to apply to ads and view applications to their ads - farthest stretch 
+* CSS styling.
+* Add in venue table data.
+* Add in Location table data.
 
 ## 5. Proposed Architecture Overview
 
