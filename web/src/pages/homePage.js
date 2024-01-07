@@ -102,6 +102,10 @@ class HomePage extends BindingClass {
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
 
+        const createButton = document.getElementById('create-ad-btn');
+        const origButtonText = createButton.innerText;
+        createButton.innerText = 'Redirecting...';
+
         const adId = document.getElementById('adsSelect').value;
         console.log("selected ads' id: " + adId);
 
