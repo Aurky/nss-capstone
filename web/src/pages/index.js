@@ -56,14 +56,14 @@ class Index extends BindingClass {
         errorMessageDisplay.innerText = ``;
         errorMessageDisplay.classList.add('hidden');
 
-//        const homePageButton = document.getElementById('home-page-button');
-//        const origButtonText = homePageButton.innerText;
-//        homePageButton.innerText = 'Loading...';
+        const homePageButton = document.getElementById('home-page-button');
+        const origButtonText = homePageButton.innerText;
+        homePageButton.innerText = 'Redirecting...';
 
         const name = await this.auth.getCurrentUserName;
 
         const user = await this.client.createUser(name, (error) => {
-//            homePageButton.innerText = origButtonText;
+            homePageButton.innerText = origButtonText;
             errorMessageDisplay.innerText = `Error: ${error.message}`;
             errorMessageDisplay.classList.remove('hidden');
         });
