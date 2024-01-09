@@ -15,3 +15,13 @@ Key Features:
 * Update Ads: Easily update any misinformation contained within your ads with a quick alteration.
 
 * Remove Clutter: Ads out of date or roles have been filled? With the click of a button, quickly remove the desired ad from your list.
+
+
+
+
+
+
+
+---------
+#### For easy access, here is the URL for the application.
+https://d1lc4znxsiw0b6.cloudfront.net
